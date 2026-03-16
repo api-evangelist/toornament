@@ -1,35 +1,45 @@
 aid: toornament
 name: Toornament
 description: >-
-  To use the Toornament API, you first need to have a Toornament account and
-  access to the Organizer dashboard. If youre new to Toornament, create an
-  account and validate your email address. You can then access the Organizer
-  Dashboard. 
+  Toornament provides an API for esports tournament management, allowing
+  developers to create and manage tournaments programmatically.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Esports
+  - Tournaments
+  - Gaming
 created: '2025-02-06'
-modified: '2025-02-06'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/toornament/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: toornament:toornament
-    name: Toornament
+    name: Toornament API
     description: >-
-      To use the Toornament API, you first need to have a Toornament account and
-      access to the Organizer dashboard. If youre new to Toornament, create an
-      account and validate your email address. You can then access the Organizer
-      Dashboard. 
-    humanURL: ' https://developer.toornament.com/v2/overview/get-started'
+      The Toornament API allows developers to integrate esports tournament
+      management capabilities into their applications.
+    humanURL: https://developer.toornament.com/v2/overview/get-started
+    baseURL: https://api.toornament.com
     tags:
-      - API
+      - Esports
+      - Tournaments
+      - Gaming
     properties:
       - type: Documentation
-        url: ' https://developer.toornament.com/v2/overview/get-started'
+        url: https://developer.toornament.com/v2/overview/get-started
+      - type: Getting Started
+        url: https://developer.toornament.com/v2/overview/get-started
+common:
+  - type: Website
+    url: https://www.toornament.com/
+  - type: Documentation
+    url: https://developer.toornament.com/
+  - type: Sign Up
+    url: https://www.toornament.com/signup/
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
