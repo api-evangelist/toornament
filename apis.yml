@@ -9,8 +9,8 @@ access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Esports
-  - Tournaments
   - Gaming
+  - Tournaments
 created: '2025-02-06'
 modified: '2026-03-16'
 url: >-
@@ -26,8 +26,8 @@ apis:
     baseURL: https://api.toornament.com
     tags:
       - Esports
-      - Tournaments
       - Gaming
+      - Tournaments
     properties:
       - type: Documentation
         url: https://developer.toornament.com/v2/overview/get-started
