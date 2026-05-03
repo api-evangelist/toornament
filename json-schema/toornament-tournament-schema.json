@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.toornament.com/schemas/tournament",
+  "title": "Toornament Tournament",
+  "description": "Schema for a Toornament esports tournament entity as returned by the Organizer API.",
+  "type": "object",
+  "required": ["id", "discipline", "name", "status", "participant_type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique tournament identifier."
+    },
+    "discipline": {
+      "type": "string",
+      "description": "Esports discipline key (e.g., league-of-legends, valorant, chess)."
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "Short tournament name."
+    },
+    "full_name": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "Full tournament name."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "completed"],
+      "description": "Current lifecycle status of the tournament."
+    },
+    "participant_type": {
+      "type": "string",
+      "enum": ["team", "player"],
+      "description": "Whether the tournament is for teams or individual players."
+    },
+    "size": {
+      "type": "integer",
+      "minimum": 2,
+      "description": "Maximum number of participants allowed."
+    },
+    "online": {
+      "type": "boolean",
+      "description": "True if the tournament is played online."
+    },
+    "country": {
+      "type": ["string", "null"],
+      "description": "ISO 3166-1 alpha-2 country code for in-person tournaments."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "IANA timezone string (e.g., America/New_York)."
+    },
+    "scheduled_date_start": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Scheduled start date."
+    },
+    "scheduled_date_end": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Scheduled end date."
+    },
+    "registration_enabled": {
+      "type": "boolean",
+      "description": "Whether registration is currently open."
+    },
+    "registration_opening_datetime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When registration opens."
+    },
+    "registration_closing_datetime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When registration closes."
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["pc", "playstation", "xbox", "switch", "mobile"]
+      },
+      "description": "Gaming platforms supported by the tournament."
+    },
+    "website": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Tournament website URL."
+    },
+    "discord": {
+      "type": ["string", "null"],
+      "description": "Discord server invite code or ID."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Public-facing tournament description."
+    },
+    "rules": {
+      "type": ["string", "null"],
+      "description": "Tournament rules and regulations."
+    },
+    "prize": {
+      "type": ["string", "null"],
+      "description": "Prize pool description."
+    },
+    "contact": {
+      "type": ["string", "null"],
+      "format": "email",
+      "description": "Organizer contact email address."
+    },
+    "public": {
+      "type": "boolean",
+      "description": "Whether the tournament appears in public listings."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the tournament has been archived."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the tournament was created."
+    }
+  },
+  "additionalProperties": false
+}

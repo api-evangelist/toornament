@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.toornament.com/schemas/participant",
+  "title": "Toornament Participant",
+  "description": "Schema for a Toornament tournament participant (player or team).",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique participant identifier."
+    },
+    "tournament_id": {
+      "type": "string",
+      "description": "ID of the tournament this participant belongs to."
+    },
+    "name": {
+      "type": "string",
+      "description": "Participant name — player username or team name."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["team", "player"],
+      "description": "Whether this is a team or individual player."
+    },
+    "email": {
+      "type": ["string", "null"],
+      "format": "email",
+      "description": "Contact email for the participant."
+    },
+    "checked_in": {
+      "type": "boolean",
+      "description": "Whether the participant has completed check-in."
+    },
+    "lineup": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "In-game username of the team member."
+          },
+          "name": {
+            "type": "string",
+            "description": "Real name or display name."
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        }
+      },
+      "description": "Team member lineup (for team tournaments)."
+    },
+    "custom_fields": {
+      "type": "object",
+      "description": "Key-value pairs of custom registration field values.",
+      "additionalProperties": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the participant was added to the tournament."
+    }
+  }
+}

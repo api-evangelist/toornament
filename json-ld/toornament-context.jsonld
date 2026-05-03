@@ -1,0 +1,147 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "toornament": "https://api.toornament.com/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Tournament": {
+      "@id": "toornament:Tournament",
+      "@context": {
+        "id": "toornament:tournamentId",
+        "name": "schema:name",
+        "full_name": "schema:alternateName",
+        "description": "schema:description",
+        "status": "toornament:tournamentStatus",
+        "discipline": "toornament:discipline",
+        "participant_type": "toornament:participantType",
+        "size": "toornament:maxParticipants",
+        "online": "toornament:isOnline",
+        "country": "schema:addressCountry",
+        "timezone": "schema:temporalCoverage",
+        "scheduled_date_start": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "scheduled_date_end": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "registration_enabled": "toornament:registrationEnabled",
+        "platforms": {
+          "@id": "toornament:platforms",
+          "@container": "@set"
+        },
+        "website": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "public": "toornament:isPublic",
+        "prize": "toornament:prizePool",
+        "contact": "schema:email",
+        "rules": "toornament:tournamentRules",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Participant": {
+      "@id": "toornament:Participant",
+      "@context": {
+        "id": "toornament:participantId",
+        "name": "schema:name",
+        "email": "schema:email",
+        "type": "toornament:participantType",
+        "checked_in": "toornament:checkedIn",
+        "lineup": {
+          "@id": "toornament:lineup",
+          "@container": "@list"
+        },
+        "custom_fields": "toornament:customFields",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Stage": {
+      "@id": "toornament:Stage",
+      "@context": {
+        "id": "toornament:stageId",
+        "name": "schema:name",
+        "number": "toornament:stageNumber",
+        "type": "toornament:stageType",
+        "size": "toornament:stageSize",
+        "status": "toornament:stageStatus"
+      }
+    },
+
+    "Match": {
+      "@id": "toornament:Match",
+      "@context": {
+        "id": "toornament:matchId",
+        "number": "toornament:matchNumber",
+        "status": "toornament:matchStatus",
+        "scheduled_datetime": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "played_at": {
+          "@id": "toornament:playedAt",
+          "@type": "xsd:dateTime"
+        },
+        "opponents": {
+          "@id": "toornament:opponents",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "RankingItem": {
+      "@id": "toornament:RankingItem",
+      "@context": {
+        "id": "toornament:rankingItemId",
+        "position": "toornament:rankingPosition",
+        "participant": "toornament:rankedParticipant",
+        "properties": "toornament:rankingStats"
+      }
+    },
+
+    "Discipline": {
+      "@id": "toornament:Discipline",
+      "@context": {
+        "id": "toornament:disciplineId",
+        "name": "schema:name",
+        "full_name": "schema:alternateName",
+        "platforms": {
+          "@id": "toornament:platforms",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Webhook": {
+      "@id": "toornament:Webhook",
+      "@context": {
+        "id": "toornament:webhookId",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "events": {
+          "@id": "toornament:subscribedEvents",
+          "@container": "@set"
+        },
+        "is_active": "toornament:isActive",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,268 @@
+vocabulary:
+  name: Toornament Vocabulary
+  description: >-
+    Domain vocabulary and taxonomy for the Toornament esports tournament
+    management platform. Covers tournament lifecycle, competition formats,
+    participants, match types, and platform concepts.
+  provider: Toornament
+  url: https://www.toornament.com
+  version: "1.0"
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+terms:
+  - term: Tournament
+    definition: >-
+      A competitive esports event with defined participants, stages, and
+      match structure. Tournaments have a discipline (game), participant
+      type (team or player), size, schedule, and lifecycle status.
+    tags:
+      - Core
+      - Tournaments
+    relatedTerms:
+      - Discipline
+      - Stage
+      - Participant
+
+  - term: Discipline
+    definition: >-
+      The esports game or competitive activity that a tournament is based
+      on (e.g., Valorant, League of Legends, Chess). Toornament supports
+      100+ disciplines with game-specific configurations.
+    tags:
+      - Core
+      - Gaming
+    relatedTerms:
+      - Tournament
+
+  - term: Stage
+    definition: >-
+      A phase within a tournament competition, such as a Group Stage,
+      Quarterfinals, or Grand Final. Stages have a type (groups,
+      single_elimination, double_elimination) and contain groups, rounds,
+      and matches.
+    tags:
+      - Core
+      - Brackets
+    relatedTerms:
+      - Tournament
+      - Group
+      - Match
+      - Bracket
+
+  - term: Group
+    definition: >-
+      A subdivision within a stage containing a subset of participants.
+      Common in group stage formats where participants compete within
+      pools before advancing to playoff brackets.
+    tags:
+      - Brackets
+    relatedTerms:
+      - Stage
+      - Round
+
+  - term: Round
+    definition: >-
+      A subdivision within a group, representing one round of competition.
+      Multiple rounds within a group allow for round-robin or best-of
+      series formats.
+    tags:
+      - Brackets
+    relatedTerms:
+      - Group
+      - Match
+
+  - term: Match
+    definition: >-
+      A single competitive encounter between two opponents within a
+      tournament. Matches have a status (pending, running, completed),
+      scheduled datetime, and a result for each opponent.
+    tags:
+      - Core
+      - Matches
+    relatedTerms:
+      - Stage
+      - Opponent
+      - Match Game
+
+  - term: Match Game
+    definition: >-
+      An individual game within a match when using best-of series format
+      (e.g., best-of-3, best-of-5). Each game has its own result
+      contributing to the overall match result.
+    tags:
+      - Matches
+    relatedTerms:
+      - Match
+
+  - term: Participant
+    definition: >-
+      A competitor in a tournament — either an individual player or a
+      team depending on the tournament's participant_type setting.
+      Participants can check in, have custom field values, and a lineup.
+    tags:
+      - Core
+      - Participants
+    relatedTerms:
+      - Tournament
+      - Team
+      - Registration
+
+  - term: Registration
+    definition: >-
+      A request submitted by a player or team to participate in a
+      tournament. Registrations have a status (pending, accepted, refused,
+      cancelled) and may require organizer approval.
+    tags:
+      - Registration
+    relatedTerms:
+      - Participant
+      - Custom Fields
+
+  - term: Check-in
+    definition: >-
+      A pre-tournament confirmation step where participants confirm their
+      availability. The check-in window is defined by opening and closing
+      datetimes. Unchecked participants may be removed before the tournament starts.
+    tags:
+      - Participants
+      - Registration
+    relatedTerms:
+      - Participant
+
+  - term: Bracket
+    definition: >-
+      A visual representation of the match schedule in an elimination
+      format. Toornament supports single elimination and double elimination
+      bracket types. The Structure API provides bracket display data.
+    tags:
+      - Brackets
+      - Visualization
+    relatedTerms:
+      - Stage
+      - Match
+
+  - term: Ranking Item
+    definition: >-
+      A standings entry within a tournament stage showing a participant's
+      current rank, wins, losses, draws, score differential, and points.
+    tags:
+      - Rankings
+    relatedTerms:
+      - Stage
+      - Participant
+
+  - term: Final Standing
+    definition: >-
+      The official final ranking of participants at the conclusion of a
+      tournament, compiled from all stage results.
+    tags:
+      - Rankings
+    relatedTerms:
+      - Ranking Item
+      - Tournament
+
+  - term: Organizer API
+    definition: >-
+      The authenticated Toornament API for tournament creators that provides
+      full CRUD capabilities. Requires an API key plus an OAuth2 access
+      token with organizer:view or organizer:admin scope.
+    tags:
+      - API
+      - Authentication
+    relatedTerms:
+      - Viewer API
+      - OAuth2
+      - API Key
+
+  - term: Viewer API
+    definition: >-
+      The read-only Toornament API for publicly accessing tournament
+      information without organizer credentials. Suitable for fan apps,
+      streaming overlays, and embedded tournament displays.
+    tags:
+      - API
+    relatedTerms:
+      - Organizer API
+
+  - term: OAuth2
+    definition: >-
+      The authorization framework used by the Toornament Organizer API.
+      Access tokens carry scopes (organizer:view, organizer:admin,
+      participant:manage) that control permitted operations.
+    tags:
+      - Authentication
+    relatedTerms:
+      - API Key
+      - Organizer API
+
+  - term: API Key
+    definition: >-
+      A per-application credential obtained from the Toornament developer
+      dashboard, passed in the X-Api-Key header. Required alongside an
+      OAuth2 token for Organizer API access.
+    tags:
+      - Authentication
+    relatedTerms:
+      - OAuth2
+
+  - term: Custom Fields
+    definition: >-
+      Configurable data fields added to tournament registration forms.
+      Organizers define custom fields to collect game-specific information
+      (IGN, player ID, etc.) during registration.
+    tags:
+      - Registration
+    relatedTerms:
+      - Registration
+      - Participant
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback registered to receive real-time event notifications
+      from Toornament (e.g., tournament.created, registration.updated,
+      match.completed) at a specified URL.
+    tags:
+      - Events
+      - Integration
+    relatedTerms:
+      - Tournament
+
+  - term: Participant Type
+    definition: >-
+      Specifies whether a tournament is for individual players or teams.
+      Set at tournament creation and determines registration requirements
+      and match opponent display.
+    tags:
+      - Tournaments
+      - Participants
+    example: "team or player"
+    relatedTerms:
+      - Tournament
+      - Participant
+
+  - term: Lineup
+    definition: >-
+      The list of individual players making up a team participant,
+      including usernames and potentially real names. Required for team
+      tournaments where rosters need verification.
+    tags:
+      - Participants
+    relatedTerms:
+      - Participant
+
+tags:
+  - API
+  - Authentication
+  - Brackets
+  - Competition
+  - Core
+  - Events
+  - Gaming
+  - Integration
+  - Matches
+  - Participants
+  - Rankings
+  - Registration
+  - Tournaments
+  - Visualization

@@ -1,0 +1,387 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Toornament Organizer API"
+  description: "Full tournament management API for esports organizers — create and manage tournaments, participants, stages, matches, rankings, and webhooks."
+  tags:
+    - Esports
+    - Gaming
+    - Tournaments
+    - Brackets
+    - Competition
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TOORNAMENT_API_KEY: TOORNAMENT_API_KEY
+      TOORNAMENT_ACCESS_TOKEN: TOORNAMENT_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: toornament-organizer
+      baseUri: https://api.toornament.com/organizer/v2
+      description: "Toornament Organizer API for full tournament lifecycle management."
+      authentication:
+        type: apikey
+        key: X-Api-Key
+        value: "{{TOORNAMENT_API_KEY}}"
+        placement: header
+      resources:
+        - name: tournaments
+          path: /tournaments
+          description: "Manage esports tournaments."
+          operations:
+            - name: list-tournaments
+              method: GET
+              description: "List tournaments organized by the authenticated user."
+              inputParameters:
+                - name: disciplines
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by discipline keys."
+                - name: statuses
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by statuses."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+            - name: create-tournament
+              method: POST
+              description: "Create a new esports tournament."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  discipline: "{{tools.discipline}}"
+                  name: "{{tools.name}}"
+                  participant_type: "{{tools.participant_type}}"
+                  size: "{{tools.size}}"
+                  timezone: "{{tools.timezone}}"
+                  platforms: "{{tools.platforms}}"
+
+        - name: tournament
+          path: /tournaments/{id}
+          description: "Manage a specific tournament."
+          operations:
+            - name: get-tournament
+              method: GET
+              description: "Get full details of a specific tournament."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-tournament
+              method: PATCH
+              description: "Partially update tournament fields."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: delete-tournament
+              method: DELETE
+              description: "Permanently delete a tournament."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: participants
+          path: /tournaments/{tournament_id}/participants
+          description: "Manage tournament participants."
+          operations:
+            - name: list-participants
+              method: GET
+              description: "List all participants in a tournament."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+            - name: create-participant
+              method: POST
+              description: "Add a new participant to a tournament."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+
+        - name: stages
+          path: /tournaments/{tournament_id}/stages
+          description: "Manage tournament stages."
+          operations:
+            - name: list-stages
+              method: GET
+              description: "List all stages for a tournament."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: matches
+          path: /tournaments/{tournament_id}/stages/{stage_id}/matches
+          description: "Retrieve and report tournament matches."
+          operations:
+            - name: list-matches
+              method: GET
+              description: "List all matches in a tournament stage."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+                - name: stage_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Stage identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: match-report
+          path: /tournaments/{tournament_id}/matches/{match_id}
+          description: "Report match results."
+          operations:
+            - name: report-match
+              method: PATCH
+              description: "Submit or update results for a specific match."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+                - name: match_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Match identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  status: "{{tools.status}}"
+                  opponents: "{{tools.opponents}}"
+
+        - name: rankings
+          path: /tournaments/{tournament_id}/stages/{stage_id}/ranking-items
+          description: "Retrieve tournament stage rankings."
+          operations:
+            - name: list-rankings
+              method: GET
+              description: "Get ranking items (standings) for a stage."
+              inputParameters:
+                - name: tournament_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tournament identifier."
+                - name: stage_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Stage identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: disciplines
+          path: /disciplines
+          description: "Access supported esports disciplines."
+          operations:
+            - name: list-disciplines
+              method: GET
+              description: "List all supported esports game disciplines."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: toornament-organizer-api
+      resources:
+        - path: /v1/tournaments
+          name: tournaments
+          description: "Tournament management."
+          operations:
+            - method: GET
+              name: list-tournaments
+              description: "List tournaments."
+              call: "toornament-organizer.list-tournaments"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+            - method: POST
+              name: create-tournament
+              description: "Create a tournament."
+              call: "toornament-organizer.create-tournament"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: toornament-organizer-mcp
+      transport: http
+      tools:
+        - name: list-tournaments
+          description: "List esports tournaments for the authenticated organizer."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.list-tournaments"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: create-tournament
+          description: "Create a new esports tournament."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "toornament-organizer.create-tournament"
+          with:
+            discipline: "tools.discipline"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-tournament
+          description: "Get full details of a specific tournament."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.get-tournament"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-participants
+          description: "List all participants in a tournament."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.list-participants"
+          with:
+            tournament_id: "tools.tournament_id"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-matches
+          description: "List all matches in a tournament stage including bracket data."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.list-matches"
+          with:
+            tournament_id: "tools.tournament_id"
+            stage_id: "tools.stage_id"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: report-match
+          description: "Submit the result for a completed match."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "toornament-organizer.report-match"
+          with:
+            tournament_id: "tools.tournament_id"
+            match_id: "tools.match_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-rankings
+          description: "Get the standings/rankings for a tournament stage."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.list-rankings"
+          with:
+            tournament_id: "tools.tournament_id"
+            stage_id: "tools.stage_id"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-disciplines
+          description: "List all supported esports disciplines (games) on Toornament."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "toornament-organizer.list-disciplines"
+          outputParameters:
+            - type: array
+              mapping: "$."

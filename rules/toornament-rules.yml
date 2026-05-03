@@ -1,0 +1,96 @@
+extends: spectral:oas
+
+rules:
+  # Toornament API uses Title Case operation summaries
+  toornament-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "Operation summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z ]+$"
+
+  # All operations must have operationId
+  toornament-operation-id-required:
+    description: All operations must have an operationId
+    message: "Operation is missing an operationId"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  # All operations must have a description
+  toornament-operation-description-required:
+    description: All operations must have a description
+    message: "Operation is missing a description"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  # Tournament endpoints must require X-Api-Key header
+  toornament-api-key-required:
+    description: API key security should be defined
+    message: "X-Api-Key security scheme should be defined"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: apiKey
+      function: truthy
+
+  # OAuth2 security scheme should be defined
+  toornament-oauth2-required:
+    description: OAuth2 security should be defined for write operations
+    message: "OAuth2 security scheme should be defined"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: oauth2
+      function: truthy
+
+  # Paginated list endpoints should accept Range header
+  toornament-pagination-range-header:
+    description: List endpoints (GET /tournaments etc.) should document Range header
+    message: "Paginated GET endpoints should accept a Range header parameter"
+    severity: warn
+    given: "$.paths[*].get.parameters[?(@.name == 'Range')]"
+    then:
+      field: in
+      function: enumeration
+      functionOptions:
+        values:
+          - header
+
+  # Successful list responses should return 206 Partial Content
+  toornament-list-response-206:
+    description: Paginated list endpoints should return 206 Partial Content
+    message: "Paginated list endpoint should return 206, not 200"
+    severity: hint
+    given: "$.paths[*].get.responses"
+    then:
+      field: "206"
+      function: truthy
+
+  # Path parameters should be described
+  toornament-path-param-description:
+    description: Path parameters should have descriptions
+    message: "Path parameter '{{value}}' is missing a description"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in=='path')]"
+    then:
+      field: description
+      function: truthy
+
+  # DELETE operations should return 204
+  toornament-delete-no-content:
+    description: DELETE operations should return 204 No Content
+    message: "DELETE operation should include a 204 response"
+    severity: warn
+    given: "$.paths[*].delete.responses"
+    then:
+      field: "204"
+      function: truthy

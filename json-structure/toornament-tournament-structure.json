@@ -1,0 +1,58 @@
+{
+  "name": "ToornamentTournament",
+  "description": "Structure of a Toornament Tournament object as returned from the Organizer API.",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique tournament identifier." },
+    { "name": "discipline", "type": "string", "required": true, "description": "Esports discipline key." },
+    { "name": "name", "type": "string", "required": true, "description": "Short tournament name." },
+    { "name": "full_name", "type": "string", "required": false, "description": "Full tournament name." },
+    { "name": "status", "type": "string", "required": true, "enum": ["pending", "running", "completed"], "description": "Tournament lifecycle status." },
+    { "name": "participant_type", "type": "string", "required": true, "enum": ["team", "player"], "description": "Competition format." },
+    { "name": "size", "type": "integer", "required": false, "description": "Max participants." },
+    { "name": "online", "type": "boolean", "required": false, "description": "Online tournament flag." },
+    { "name": "country", "type": "string", "required": false, "description": "ISO country code." },
+    { "name": "timezone", "type": "string", "required": false, "description": "IANA timezone." },
+    { "name": "scheduled_date_start", "type": "string", "format": "date", "required": false, "description": "Start date." },
+    { "name": "scheduled_date_end", "type": "string", "format": "date", "required": false, "description": "End date." },
+    { "name": "registration_enabled", "type": "boolean", "required": false, "description": "Registration open." },
+    { "name": "platforms", "type": "array", "items": "string", "required": false, "description": "Gaming platforms." },
+    { "name": "website", "type": "string", "format": "uri", "required": false, "description": "Tournament website." },
+    { "name": "discord", "type": "string", "required": false, "description": "Discord server." },
+    { "name": "public", "type": "boolean", "required": false, "description": "Publicly visible." },
+    { "name": "archived", "type": "boolean", "required": false, "description": "Archived flag." },
+    { "name": "created_at", "type": "string", "format": "date-time", "required": false, "description": "Creation timestamp." }
+  ],
+  "nestedObjects": [
+    {
+      "name": "Stage",
+      "fields": [
+        { "name": "id", "type": "string", "description": "Stage identifier." },
+        { "name": "number", "type": "integer", "description": "Stage order." },
+        { "name": "name", "type": "string", "description": "Stage name." },
+        { "name": "type", "type": "string", "description": "Stage type (groups, single_elimination, etc.)." },
+        { "name": "size", "type": "integer", "description": "Number of participants." },
+        { "name": "status", "type": "string", "description": "Stage status." }
+      ]
+    },
+    {
+      "name": "Participant",
+      "fields": [
+        { "name": "id", "type": "string", "description": "Participant identifier." },
+        { "name": "name", "type": "string", "description": "Player/team name." },
+        { "name": "checked_in", "type": "boolean", "description": "Check-in status." },
+        { "name": "lineup", "type": "array", "description": "Team members." }
+      ]
+    },
+    {
+      "name": "Match",
+      "fields": [
+        { "name": "id", "type": "string", "description": "Match identifier." },
+        { "name": "number", "type": "integer", "description": "Match number." },
+        { "name": "status", "type": "string", "description": "Match status." },
+        { "name": "scheduled_datetime", "type": "string", "format": "date-time", "description": "Scheduled time." },
+        { "name": "opponents", "type": "array", "description": "Two opponents with results." }
+      ]
+    }
+  ]
+}

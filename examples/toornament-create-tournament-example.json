@@ -1,0 +1,67 @@
+{
+  "title": "Toornament Create Tournament - Example Request and Response",
+  "description": "Example of creating a new esports tournament via POST /tournaments.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.toornament.com/organizer/v2/tournaments",
+    "headers": {
+      "X-Api-Key": "{TOORNAMENT_API_KEY}",
+      "Authorization": "Bearer {OAUTH2_ACCESS_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "discipline": "valorant",
+      "name": "Valorant Champions Cup",
+      "full_name": "2026 Valorant Champions Cup - North America",
+      "participant_type": "team",
+      "size": 16,
+      "timezone": "America/Los_Angeles",
+      "platforms": ["pc"],
+      "online": true,
+      "scheduled_date_start": "2026-06-01",
+      "scheduled_date_end": "2026-06-15",
+      "registration_enabled": true,
+      "registration_opening_datetime": "2026-05-01T00:00:00Z",
+      "registration_closing_datetime": "2026-05-25T23:59:59Z",
+      "public": true,
+      "description": "Compete for the 2026 Valorant Champions Cup title. Top 16 teams in North America battle through group stages and playoff brackets.",
+      "rules": "Standard competitive rules apply. Teams must have 5 active players and 1 substitute.",
+      "prize": "$10,000 prize pool",
+      "contact": "esports@example.com",
+      "discord": "valorant-champions-cup"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "532983ar-a143-1238-b123-a12h324m4f3c",
+      "discipline": "valorant",
+      "name": "Valorant Champions Cup",
+      "full_name": "2026 Valorant Champions Cup - North America",
+      "status": "pending",
+      "participant_type": "team",
+      "size": 16,
+      "online": true,
+      "country": null,
+      "timezone": "America/Los_Angeles",
+      "scheduled_date_start": "2026-06-01",
+      "scheduled_date_end": "2026-06-15",
+      "registration_enabled": true,
+      "registration_opening_datetime": "2026-05-01T00:00:00+00:00",
+      "registration_closing_datetime": "2026-05-25T23:59:59+00:00",
+      "platforms": ["pc"],
+      "website": null,
+      "discord": "valorant-champions-cup",
+      "description": "Compete for the 2026 Valorant Champions Cup title. Top 16 teams in North America battle through group stages and playoff brackets.",
+      "rules": "Standard competitive rules apply. Teams must have 5 active players and 1 substitute.",
+      "prize": "$10,000 prize pool",
+      "contact": "esports@example.com",
+      "public": true,
+      "archived": false,
+      "created_at": "2026-05-03T12:00:00+00:00"
+    }
+  }
+}

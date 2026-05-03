@@ -1,0 +1,71 @@
+{
+  "title": "Toornament Report Match Result - Example",
+  "description": "Example of submitting a match result via PATCH /tournaments/{id}/matches/{match_id}.",
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.toornament.com/organizer/v2/tournaments/532983ar-a143-1238-b123-a12h324m4f3c/matches/m-00001",
+    "headers": {
+      "X-Api-Key": "{TOORNAMENT_API_KEY}",
+      "Authorization": "Bearer {OAUTH2_ACCESS_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "status": "completed",
+      "opponents": [
+        {
+          "number": 1,
+          "result": "win",
+          "score": 13,
+          "forfeit": false
+        },
+        {
+          "number": 2,
+          "result": "lose",
+          "score": 7,
+          "forfeit": false
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "m-00001",
+      "tournament_id": "532983ar-a143-1238-b123-a12h324m4f3c",
+      "stage_id": "stage-001",
+      "round_id": "round-001",
+      "group_id": "group-a",
+      "number": 1,
+      "status": "completed",
+      "scheduled_datetime": "2026-06-01T18:00:00+00:00",
+      "played_at": "2026-06-01T18:45:00+00:00",
+      "opponents": [
+        {
+          "number": 1,
+          "result": "win",
+          "score": 13,
+          "forfeit": false,
+          "participant": {
+            "id": "p-001",
+            "name": "Team Alpha",
+            "type": "team"
+          }
+        },
+        {
+          "number": 2,
+          "result": "lose",
+          "score": 7,
+          "forfeit": false,
+          "participant": {
+            "id": "p-002",
+            "name": "Team Bravo",
+            "type": "team"
+          }
+        }
+      ]
+    }
+  }
+}
