@@ -79,11 +79,11 @@ common:
     url: https://developer.toornament.com/
     name: Toornament Developer Documentation
     description: 'null'
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developer.toornament.com/v2/overview/get-started
     name: Getting Started Guide
     description: 'null'
-  - type: Sign Up
+  - type: SignUp
     url: https://www.toornament.com/signup/
     name: Toornament Sign Up
     description: 'null'
@@ -95,7 +95,7 @@ common:
     url: https://www.toornament.com/en_US/p/tournament-api
     name: API Pricing
     description: 'null'
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/toornament-context.jsonld
     name: Toornament JSON-LD Context
     description: 'JSON-LD context defining Toornament tournament domain vocabulary.'
