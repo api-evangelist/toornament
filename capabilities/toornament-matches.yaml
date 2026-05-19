@@ -1,0 +1,168 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toornament API — Matches
+  description: 'Toornament API — Matches. 2 operations. Lead operation: Report Match Result. Self-contained Naftiko capability
+    covering one Toornament business surface.'
+  tags:
+  - Toornament
+  - Matches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOORNAMENT_API_KEY: TOORNAMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toornament-matches
+    baseUri: https://api.toornament.com/organizer/v2
+    description: Toornament API — Matches business capability. Self-contained, no shared references.
+    resources:
+    - name: tournaments-tournament_id-matches-match_id
+      path: /tournaments/{tournament_id}/matches/{match_id}
+      operations:
+      - name: reportmatch
+        method: PATCH
+        description: Report Match Result
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tournament_id
+          in: path
+          type: string
+          required: true
+        - name: match_id
+          in: path
+          type: string
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tournaments-tournament_id-stages-stage_id-matches
+      path: /tournaments/{tournament_id}/stages/{stage_id}/matches
+      operations:
+      - name: listmatches
+        method: GET
+        description: List Matches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tournament_id
+          in: path
+          type: string
+          required: true
+        - name: stage_id
+          in: path
+          type: string
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: Range
+          in: header
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.TOORNAMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toornament-matches-rest
+    port: 8080
+    description: REST adapter for Toornament API — Matches. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tournaments/{tournament-id}/matches/{match-id}
+      name: tournaments-tournament-id-matches-match-id
+      description: REST surface for tournaments-tournament_id-matches-match_id.
+      operations:
+      - method: PATCH
+        name: reportmatch
+        description: Report Match Result
+        call: toornament-matches.reportmatch
+        with:
+          tournament_id: rest.tournament_id
+          match_id: rest.match_id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tournaments/{tournament-id}/stages/{stage-id}/matches
+      name: tournaments-tournament-id-stages-stage-id-matches
+      description: REST surface for tournaments-tournament_id-stages-stage_id-matches.
+      operations:
+      - method: GET
+        name: listmatches
+        description: List Matches
+        call: toornament-matches.listmatches
+        with:
+          tournament_id: rest.tournament_id
+          stage_id: rest.stage_id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          Range: rest.Range
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toornament-matches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toornament API — Matches. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: report-match-result
+      description: Report Match Result
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toornament-matches.reportmatch
+      with:
+        tournament_id: tools.tournament_id
+        match_id: tools.match_id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-matches
+      description: List Matches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toornament-matches.listmatches
+      with:
+        tournament_id: tools.tournament_id
+        stage_id: tools.stage_id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        Range: tools.Range
+      outputParameters:
+      - type: object
+        mapping: $.

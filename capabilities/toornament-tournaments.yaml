@@ -1,0 +1,341 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toornament API — Tournaments
+  description: 'Toornament API — Tournaments. 5 operations. Lead operation: List Tournaments. Self-contained Naftiko capability
+    covering one Toornament business surface.'
+  tags:
+  - Toornament
+  - Tournaments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOORNAMENT_API_KEY: TOORNAMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toornament-tournaments
+    baseUri: https://api.toornament.com/organizer/v2
+    description: Toornament API — Tournaments business capability. Self-contained, no shared references.
+    resources:
+    - name: tournaments
+      path: /tournaments
+      operations:
+      - name: listtournaments
+        method: GET
+        description: List Tournaments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Api-Key
+          in: header
+          type: string
+          description: Toornament API key.
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: OAuth2 access token with organizer:view scope.
+          required: true
+        - name: Range
+          in: header
+          type: string
+          description: Pagination range (e.g., tournaments=0-49, max 50 items).
+        - name: disciplines
+          in: query
+          type: string
+          description: Comma-separated list of discipline keys to filter by.
+        - name: statuses
+          in: query
+          type: string
+          description: Comma-separated statuses (pending, running, completed).
+        - name: scheduled_before
+          in: query
+          type: string
+          description: Filter tournaments scheduled before this date.
+        - name: scheduled_after
+          in: query
+          type: string
+          description: Filter tournaments scheduled after this date.
+        - name: countries
+          in: query
+          type: string
+          description: Comma-separated ISO country codes to filter by.
+        - name: platforms
+          in: query
+          type: string
+          description: Comma-separated platform keys (pc, playstation, xbox, etc.).
+        - name: is_online
+          in: query
+          type: integer
+          description: Filter by online (1) or offline (0) tournaments.
+        - name: sort
+          in: query
+          type: string
+          description: Sort field (e.g., created_at, scheduled_date_start).
+      - name: createtournament
+        method: POST
+        description: Create Tournament
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tournaments-id
+      path: /tournaments/{id}
+      operations:
+      - name: gettournament
+        method: GET
+        description: Get Tournament
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique tournament identifier.
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+      - name: updatetournament
+        method: PATCH
+        description: Update Tournament
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetournament
+        method: DELETE
+        description: Delete Tournament
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TOORNAMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toornament-tournaments-rest
+    port: 8080
+    description: REST adapter for Toornament API — Tournaments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tournaments
+      name: tournaments
+      description: REST surface for tournaments.
+      operations:
+      - method: GET
+        name: listtournaments
+        description: List Tournaments
+        call: toornament-tournaments.listtournaments
+        with:
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          Range: rest.Range
+          disciplines: rest.disciplines
+          statuses: rest.statuses
+          scheduled_before: rest.scheduled_before
+          scheduled_after: rest.scheduled_after
+          countries: rest.countries
+          platforms: rest.platforms
+          is_online: rest.is_online
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtournament
+        description: Create Tournament
+        call: toornament-tournaments.createtournament
+        with:
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tournaments/{id}
+      name: tournaments-id
+      description: REST surface for tournaments-id.
+      operations:
+      - method: GET
+        name: gettournament
+        description: Get Tournament
+        call: toornament-tournaments.gettournament
+        with:
+          id: rest.id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatetournament
+        description: Update Tournament
+        call: toornament-tournaments.updatetournament
+        with:
+          id: rest.id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetournament
+        description: Delete Tournament
+        call: toornament-tournaments.deletetournament
+        with:
+          id: rest.id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toornament-tournaments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toornament API — Tournaments. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-tournaments
+      description: List Tournaments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toornament-tournaments.listtournaments
+      with:
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        Range: tools.Range
+        disciplines: tools.disciplines
+        statuses: tools.statuses
+        scheduled_before: tools.scheduled_before
+        scheduled_after: tools.scheduled_after
+        countries: tools.countries
+        platforms: tools.platforms
+        is_online: tools.is_online
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-tournament
+      description: Create Tournament
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toornament-tournaments.createtournament
+      with:
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tournament
+      description: Get Tournament
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toornament-tournaments.gettournament
+      with:
+        id: tools.id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tournament
+      description: Update Tournament
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toornament-tournaments.updatetournament
+      with:
+        id: tools.id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-tournament
+      description: Delete Tournament
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toornament-tournaments.deletetournament
+      with:
+        id: tools.id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+      outputParameters:
+      - type: object
+        mapping: $.

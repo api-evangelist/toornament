@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toornament API — Registrations
+  description: 'Toornament API — Registrations. 1 operations. Lead operation: List Registrations. Self-contained Naftiko capability
+    covering one Toornament business surface.'
+  tags:
+  - Toornament
+  - Registrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOORNAMENT_API_KEY: TOORNAMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toornament-registrations
+    baseUri: https://api.toornament.com/organizer/v2
+    description: Toornament API — Registrations business capability. Self-contained, no shared references.
+    resources:
+    - name: tournaments-tournament_id-registrations
+      path: /tournaments/{tournament_id}/registrations
+      operations:
+      - name: listregistrations
+        method: GET
+        description: List Registrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tournament_id
+          in: path
+          type: string
+          required: true
+        - name: X-Api-Key
+          in: header
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+        - name: Range
+          in: header
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.TOORNAMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toornament-registrations-rest
+    port: 8080
+    description: REST adapter for Toornament API — Registrations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tournaments/{tournament-id}/registrations
+      name: tournaments-tournament-id-registrations
+      description: REST surface for tournaments-tournament_id-registrations.
+      operations:
+      - method: GET
+        name: listregistrations
+        description: List Registrations
+        call: toornament-registrations.listregistrations
+        with:
+          tournament_id: rest.tournament_id
+          X-Api-Key: rest.X-Api-Key
+          Authorization: rest.Authorization
+          Range: rest.Range
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toornament-registrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toornament API — Registrations. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-registrations
+      description: List Registrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toornament-registrations.listregistrations
+      with:
+        tournament_id: tools.tournament_id
+        X-Api-Key: tools.X-Api-Key
+        Authorization: tools.Authorization
+        Range: tools.Range
+      outputParameters:
+      - type: object
+        mapping: $.
