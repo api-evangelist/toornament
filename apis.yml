@@ -1,9 +1,10 @@
 aid: toornament
 name: Toornament
-description: Toornament is an esports tournament management platform providing a comprehensive API for creating, managing,
-  and viewing tournaments across 100+ esports disciplines. The API supports full tournament lifecycle management including
-  participant registration, bracket generation, match reporting, and real-time standings. Used by game publishers, esports
-  organizers, broadcasters, and gaming communities worldwide.
+description: >-
+  Toornament is an esports tournament management platform providing a comprehensive API for creating, managing, and
+  viewing tournaments across 100+ esports disciplines. The API supports full tournament lifecycle management including
+  participant registration, bracket generation, match reporting, and real-time standings. Used by game publishers,
+  esports organizers, broadcasters, and gaming communities worldwide.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -21,59 +22,46 @@ specificationVersion: '0.19'
 apis:
   - aid: toornament:organizer-api
     name: Toornament Organizer API
-    description: Full-featured tournament management API for tournament organizers. Provides complete CRUD operations for tournaments,
-      participant management, stage and bracket configuration, match reporting, registration management, and webhook subscriptions.
-      Requires API key authentication plus OAuth2 access tokens with organizer:view or organizer:admin scopes.
+    description: >-
+      Full-featured tournament management API for tournament organizers. Provides complete CRUD operations for
+      tournaments, participant management, stage and bracket configuration, match reporting, registration management,
+      and webhook subscriptions. Requires API key authentication plus OAuth2 access tokens with organizer:view or
+      organizer:admin scopes.
     humanURL: https://developer.toornament.com/v2/overview/get-started
     baseURL: https://api.toornament.com/organizer/v2
     tags:
-    - Brackets
-    - Esports
-    - Gaming
-    - Matches
-    - Organizer
-    - Participants
-    - Tournaments
+      - Brackets
+      - Esports
+      - Gaming
+      - Matches
+      - Organizer
+      - Participants
+      - Tournaments
     properties:
-    - type: Documentation
-      url: https://developer.toornament.com/v2/overview/get-started
-    - type: OpenAPI
-      url: openapi/toornament-openapi.yml
-    - type: SpectralRules
-      url: rules/toornament-rules.yml
-    - type: NaftikoCapability
-      url: capabilities/toornament-disciplines.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-matches.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-participants.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-rankings.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-registrations.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-stages.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-tournaments.yaml
-    - type: NaftikoCapability
-      url: capabilities/toornament-webhooks.yaml
+      - type: Documentation
+        url: https://developer.toornament.com/v2/overview/get-started
+      - type: OpenAPI
+        url: openapi/toornament-openapi.yml
+      - type: SpectralRules
+        url: rules/toornament-rules.yml
   - aid: toornament:viewer-api
     name: Toornament Viewer API
-    description: Read-only public API for accessing tournament information without full organizer authentication. Ideal for
-      embedding tournament brackets, leaderboards, and match schedules in applications, streaming overlays, and fan sites. Supports
-      disciplines, tournaments, participants, stages, matches, and rankings.
+    description: >-
+      Read-only public API for accessing tournament information without full organizer authentication. Ideal for
+      embedding tournament brackets, leaderboards, and match schedules in applications, streaming overlays, and fan
+      sites. Supports disciplines, tournaments, participants, stages, matches, and rankings.
     humanURL: https://developer.toornament.com/v2/doc/viewer_overview
     baseURL: https://api.toornament.com/viewer/v2
     tags:
-    - Brackets
-    - Esports
-    - Gaming
-    - Read-Only
-    - Tournaments
-    - Viewer
+      - Brackets
+      - Esports
+      - Gaming
+      - Read-Only
+      - Tournaments
+      - Viewer
     properties:
-    - type: Documentation
-      url: https://developer.toornament.com/v2/doc/viewer_overview
+      - type: Documentation
+        url: https://developer.toornament.com/v2/doc/viewer_overview
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/toornament
@@ -124,33 +112,33 @@ common:
   - name: Features
     type: Features
     data:
-    - name: Tournament Creation and Management
-    - name: Participant Registration
-    - name: Bracket Generation (Single/Double Elimination)
-    - name: Group Stage Management
-    - name: Match Reporting
-    - name: Live Rankings and Standings
-    - name: Custom Registration Fields
-    - name: Check-in Management
-    - name: Webhook Event Notifications
-    - name: Multi-discipline Support (100+ games)
-    - name: Team and Player Support
-    - name: Public Tournament Viewer API
+      - name: Tournament Creation and Management
+      - name: Participant Registration
+      - name: Bracket Generation (Single/Double Elimination)
+      - name: Group Stage Management
+      - name: Match Reporting
+      - name: Live Rankings and Standings
+      - name: Custom Registration Fields
+      - name: Check-in Management
+      - name: Webhook Event Notifications
+      - name: Multi-discipline Support (100+ games)
+      - name: Team and Player Support
+      - name: Public Tournament Viewer API
   - name: Use Cases
     type: UseCases
     data:
-    - name: Esports Tournament Platform
-    - name: Game Publisher Tournament Integration
-    - name: Streaming Overlay Bracket Display
-    - name: Community Tournament Management
-    - name: Fan Site Tournament Viewer
-    - name: Circuit and League Management
+      - name: Esports Tournament Platform
+      - name: Game Publisher Tournament Integration
+      - name: Streaming Overlay Bracket Display
+      - name: Community Tournament Management
+      - name: Fan Site Tournament Viewer
+      - name: Circuit and League Management
   - name: Integrations
     type: Integrations
     data:
-    - name: Postman
-    - name: Insomnia
-    - name: OAuth2 Identity Providers
+      - name: Postman
+      - name: Insomnia
+      - name: OAuth2 Identity Providers
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

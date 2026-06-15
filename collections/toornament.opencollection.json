@@ -1,0 +1,603 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toornament API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tournaments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tournaments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "disciplines",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of discipline keys to filter by."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated statuses (pending, running, completed)."
+              },
+              {
+                "name": "scheduled_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter tournaments scheduled before this date."
+              },
+              {
+                "name": "scheduled_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter tournaments scheduled after this date."
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated ISO country codes to filter by."
+              },
+              {
+                "name": "platforms",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated platform keys (pc, playstation, xbox, etc.)."
+              },
+              {
+                "name": "is_online",
+                "value": "",
+                "type": "query",
+                "description": "Filter by online (1) or offline (0) tournaments."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field (e.g., created_at, scheduled_date_start)."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of tournaments organized by the authenticated user. Supports filtering by discipline, status, dates, country, platform, and more."
+        },
+        {
+          "info": {
+            "name": "Create Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.toornament.com/organizer/v2/tournaments",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new esports tournament. Requires organizer:admin OAuth2 scope."
+        },
+        {
+          "info": {
+            "name": "Get Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique tournament identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the full details of a specific tournament by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update tournament fields. Requires organizer:admin OAuth2 scope."
+        },
+        {
+          "info": {
+            "name": "Delete Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently remove a tournament. Requires organizer:admin OAuth2 scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Participants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path",
+                "description": "The tournament identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of participants for a tournament."
+        },
+        {
+          "info": {
+            "name": "Create Participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new participant (player or team) to a tournament."
+        },
+        {
+          "info": {
+            "name": "Get Participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a specific participant in a tournament."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Stages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/stages",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all stages defined for a tournament (e.g., group stage, bracket stage)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Matches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Matches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/stages/:stage_id/matches",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stage_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all matches within a tournament stage, including bracket display data."
+        },
+        {
+          "info": {
+            "name": "Report Match Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/matches/:match_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "match_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit or update the result for a specific match. Requires organizer:admin scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rankings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ranking Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/stages/:stage_id/ranking-items",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stage_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the ranking items (standings) for a specific tournament stage."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Registrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/registrations",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all registrations for a tournament including approval status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Disciplines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Disciplines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/disciplines",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the list of all supported esports disciplines (games) on Toornament."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/webhooks",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve all webhook subscriptions configured for the authenticated application."
+        },
+        {
+          "info": {
+            "name": "Create Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.toornament.com/organizer/v2/webhooks",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new webhook endpoint to receive tournament event notifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
