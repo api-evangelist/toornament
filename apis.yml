@@ -77,7 +77,7 @@ common:
     url: https://developer.toornament.com/v2/overview/get-started
     name: Getting Started Guide
     description: 'null'
-  - type: SignUp
+  - type: Signup
     url: https://www.toornament.com/signup/
     name: Toornament Sign Up
     description: 'null'
@@ -93,7 +93,7 @@ common:
     url: json-ld/toornament-context.jsonld
     name: Toornament JSON-LD Context
     description: JSON-LD context defining Toornament tournament domain vocabulary.
-  - type: JSON-Schema
+  - type: JSONSchema
     url: json-schema/toornament-tournament-schema.json
     name: Toornament Tournament Schema
     description: JSON Schema for the Toornament Tournament entity.
