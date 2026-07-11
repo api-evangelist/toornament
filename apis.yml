@@ -63,6 +63,8 @@ apis:
       - type: Documentation
         url: https://developer.toornament.com/v2/doc/viewer_overview
 common:
+  - type: DomainSecurity
+    url: security/toornament-domain-security.yml
   - type: Authentication
     url: authentication/toornament-authentication.yml
   - type: OAuthScopes

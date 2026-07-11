@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/toornament-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: API key obtained from the Toornament developer dashboard.
+  sources:
+  - openapi/toornament-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.toornament.com/oauth/authorize
+    tokenUrl: https://api.toornament.com/oauth/v2/token
+    scopes: 3
+  description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+  sources:
+  - openapi/toornament-openapi.yml
