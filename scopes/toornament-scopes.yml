@@ -1,0 +1,30 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/toornament-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/toornament-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.toornament.com/oauth/authorize
+    tokenUrl: https://api.toornament.com/oauth/v2/token
+  description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+scopes:
+- scope: organizer:admin
+  description: Full administrative access to tournament management.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/toornament-openapi.yml
+- scope: organizer:view
+  description: Read access to organizer tournament data.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/toornament-openapi.yml
+- scope: participant:manage
+  description: Manage participant registrations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/toornament-openapi.yml

@@ -63,6 +63,10 @@ apis:
       - type: Documentation
         url: https://developer.toornament.com/v2/doc/viewer_overview
 common:
+  - type: Authentication
+    url: authentication/toornament-authentication.yml
+  - type: OAuthScopes
+    url: scopes/toornament-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/toornament
   - type: Website
@@ -109,6 +113,8 @@ common:
     url: vocabulary/toornament-vocabulary.yml
     name: Toornament Vocabulary
     description: Domain vocabulary for the Toornament esports platform.
+  - type: Blog
+    url: https://blog.toornament.com/feed/
   - name: Features
     type: Features
     data:
