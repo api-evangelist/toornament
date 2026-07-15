@@ -63,6 +63,8 @@ apis:
       - type: Documentation
         url: https://developer.toornament.com/v2/doc/viewer_overview
 common:
+  - type: AgenticAccess
+    url: agentic-access/toornament-agentic-access.yml
   - type: DomainSecurity
     url: security/toornament-domain-security.yml
   - type: Authentication
