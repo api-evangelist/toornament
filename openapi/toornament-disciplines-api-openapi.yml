@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Toornament Disciplines API
+  description: The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.
+  version: '2.0'
+  contact:
+    name: Toornament Developer
+    url: https://developer.toornament.com
+  termsOfService: https://www.toornament.com/en_US/legal
+servers:
+- url: https://api.toornament.com/organizer/v2
+  description: Organizer API — full tournament management (authenticated)
+- url: https://api.toornament.com/viewer/v2
+  description: Viewer API — public read-only tournament access
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Disciplines
+  description: Access esports discipline metadata.
+paths:
+  /disciplines:
+    get:
+      operationId: listDisciplines
+      summary: List Disciplines
+      description: Retrieve the list of all supported esports disciplines (games) on Toornament.
+      tags:
+      - Disciplines
+      parameters:
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Range
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '206':
+          description: Paginated list of disciplines.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discipline'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Discipline:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Discipline identifier key (e.g., league-of-legends).
+        name:
+          type: string
+          description: Display name of the game/discipline.
+        full_name:
+          type: string
+          description: Full title of the game.
+        copyrights:
+          type: string
+          description: Copyright attribution text.
+        platforms:
+          type: array
+          items:
+            type: string
+          description: Supported gaming platforms.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key obtained from the Toornament developer dashboard.
+    oauth2:
+      type: oauth2
+      description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.toornament.com/oauth/authorize
+          tokenUrl: https://api.toornament.com/oauth/v2/token
+          scopes:
+            organizer:view: Read access to organizer tournament data.
+            organizer:admin: Full administrative access to tournament management.
+            participant:manage: Manage participant registrations.

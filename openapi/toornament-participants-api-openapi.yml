@@ -1,0 +1,229 @@
+openapi: 3.1.0
+info:
+  title: Toornament Disciplines Participants API
+  description: The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.
+  version: '2.0'
+  contact:
+    name: Toornament Developer
+    url: https://developer.toornament.com
+  termsOfService: https://www.toornament.com/en_US/legal
+servers:
+- url: https://api.toornament.com/organizer/v2
+  description: Organizer API — full tournament management (authenticated)
+- url: https://api.toornament.com/viewer/v2
+  description: Viewer API — public read-only tournament access
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Participants
+  description: Manage tournament participants and registrations.
+paths:
+  /tournaments/{tournament_id}/participants:
+    get:
+      operationId: listParticipants
+      summary: List Participants
+      description: Retrieve a paginated list of participants for a tournament.
+      tags:
+      - Participants
+      parameters:
+      - name: tournament_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The tournament identifier.
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Range
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '206':
+          description: Paginated list of participants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Participant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createParticipant
+      summary: Create Participant
+      description: Add a new participant (player or team) to a tournament.
+      tags:
+      - Participants
+      parameters:
+      - name: tournament_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParticipantCreate'
+      responses:
+        '201':
+          description: Participant created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Participant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tournaments/{tournament_id}/participants/{id}:
+    get:
+      operationId: getParticipant
+      summary: Get Participant
+      description: Get details of a specific participant in a tournament.
+      tags:
+      - Participants
+      parameters:
+      - name: tournament_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Participant details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Participant'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ParticipantCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        lineup:
+          type: array
+          items:
+            type: object
+        custom_fields:
+          type: object
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique participant identifier.
+        tournament_id:
+          type: string
+        name:
+          type: string
+          description: Participant name (player username or team name).
+        type:
+          type: string
+          enum:
+          - team
+          - player
+        email:
+          type: string
+          format: email
+        checked_in:
+          type: boolean
+          description: Whether the participant has checked in.
+        lineup:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+              name:
+                type: string
+          description: Team lineup for team tournaments.
+        custom_fields:
+          type: object
+          description: Custom registration field values.
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key obtained from the Toornament developer dashboard.
+    oauth2:
+      type: oauth2
+      description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.toornament.com/oauth/authorize
+          tokenUrl: https://api.toornament.com/oauth/v2/token
+          scopes:
+            organizer:view: Read access to organizer tournament data.
+            organizer:admin: Full administrative access to tournament management.
+            participant:manage: Manage participant registrations.

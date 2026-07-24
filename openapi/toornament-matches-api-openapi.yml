@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  title: Toornament Disciplines Matches API
+  description: The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.
+  version: '2.0'
+  contact:
+    name: Toornament Developer
+    url: https://developer.toornament.com
+  termsOfService: https://www.toornament.com/en_US/legal
+servers:
+- url: https://api.toornament.com/organizer/v2
+  description: Organizer API — full tournament management (authenticated)
+- url: https://api.toornament.com/viewer/v2
+  description: Viewer API — public read-only tournament access
+security:
+- apiKey: []
+- oauth2: []
+tags:
+- name: Matches
+  description: Manage tournament matches and results.
+paths:
+  /tournaments/{tournament_id}/stages/{stage_id}/matches:
+    get:
+      operationId: listMatches
+      summary: List Matches
+      description: Retrieve all matches within a tournament stage, including bracket display data.
+      tags:
+      - Matches
+      parameters:
+      - name: tournament_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: stage_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Range
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '206':
+          description: Paginated list of matches.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Match'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tournaments/{tournament_id}/matches/{match_id}:
+    patch:
+      operationId: reportMatch
+      summary: Report Match Result
+      description: Submit or update the result for a specific match. Requires organizer:admin scope.
+      tags:
+      - Matches
+      parameters:
+      - name: tournament_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: match_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Api-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchReport'
+      responses:
+        '200':
+          description: Match result reported.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Match'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MatchReport:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - completed
+        opponents:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              result:
+                type: string
+                enum:
+                - win
+                - lose
+                - draw
+              score:
+                type: integer
+              forfeit:
+                type: boolean
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique match identifier.
+        tournament_id:
+          type: string
+        stage_id:
+          type: string
+        round_id:
+          type: string
+        group_id:
+          type: string
+        number:
+          type: integer
+          description: Match number within the stage.
+        status:
+          type: string
+          enum:
+          - pending
+          - running
+          - completed
+          description: Current match status.
+        scheduled_datetime:
+          type: string
+          format: date-time
+        played_at:
+          type: string
+          format: date-time
+        opponents:
+          type: array
+          maxItems: 2
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              participant:
+                $ref: '#/components/schemas/Participant'
+              result:
+                type: string
+                enum:
+                - win
+                - lose
+                - draw
+              score:
+                type: integer
+              forfeit:
+                type: boolean
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique participant identifier.
+        tournament_id:
+          type: string
+        name:
+          type: string
+          description: Participant name (player username or team name).
+        type:
+          type: string
+          enum:
+          - team
+          - player
+        email:
+          type: string
+          format: email
+        checked_in:
+          type: boolean
+          description: Whether the participant has checked in.
+        lineup:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+              name:
+                type: string
+          description: Team lineup for team tournaments.
+        custom_fields:
+          type: object
+          description: Custom registration field values.
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key obtained from the Toornament developer dashboard.
+    oauth2:
+      type: oauth2
+      description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.toornament.com/oauth/authorize
+          tokenUrl: https://api.toornament.com/oauth/v2/token
+          scopes:
+            organizer:view: Read access to organizer tournament data.
+            organizer:admin: Full administrative access to tournament management.
+            participant:manage: Manage participant registrations.
