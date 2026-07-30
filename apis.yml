@@ -6,9 +6,22 @@ description: >-
   participant registration, bracket generation, match reporting, and real-time standings. Used by game publishers,
   esports organizers, broadcasters, and gaming communities worldwide.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/toornament.png
 tags:
   - Esports
   - Gaming
@@ -20,48 +33,136 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/toornament/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: toornament:organizer-api
-    name: Toornament Organizer API
-    description: >-
-      Full-featured tournament management API for tournament organizers. Provides complete CRUD operations for
-      tournaments, participant management, stage and bracket configuration, match reporting, registration management,
-      and webhook subscriptions. Requires API key authentication plus OAuth2 access tokens with organizer:view or
-      organizer:admin scopes.
-    humanURL: https://developer.toornament.com/v2/overview/get-started
-    baseURL: https://api.toornament.com/organizer/v2
-    tags:
-      - Brackets
-      - Esports
-      - Gaming
-      - Matches
-      - Organizer
-      - Participants
-      - Tournaments
-    properties:
-      - type: Documentation
-        url: https://developer.toornament.com/v2/overview/get-started
-      - type: OpenAPI
-        url: openapi/toornament-openapi.yml
-      - type: SpectralRules
-        url: rules/toornament-rules.yml
-  - aid: toornament:viewer-api
-    name: Toornament Viewer API
-    description: >-
-      Read-only public API for accessing tournament information without full organizer authentication. Ideal for
-      embedding tournament brackets, leaderboards, and match schedules in applications, streaming overlays, and fan
-      sites. Supports disciplines, tournaments, participants, stages, matches, and rankings.
-    humanURL: https://developer.toornament.com/v2/doc/viewer_overview
-    baseURL: https://api.toornament.com/viewer/v2
-    tags:
-      - Brackets
-      - Esports
-      - Gaming
-      - Read-Only
-      - Tournaments
-      - Viewer
-    properties:
-      - type: Documentation
-        url: https://developer.toornament.com/v2/doc/viewer_overview
+- aid: toornament:viewer-api
+  name: Toornament Viewer API
+  description: >-
+    Read-only public API for accessing tournament information without full organizer authentication. Ideal
+    for embedding tournament brackets, leaderboards, and match schedules in applications, streaming overlays,
+    and fan sites. Supports disciplines, tournaments, participants, stages, matches, and rankings.
+  humanURL: https://developer.toornament.com/v2/doc/viewer_overview
+  baseURL: https://api.toornament.com/viewer/v2
+  tags:
+  - Brackets
+  - Esports
+  - Gaming
+  - Read-Only
+  - Tournaments
+  - Viewer
+  properties:
+  - type: Documentation
+    url: https://developer.toornament.com/v2/doc/viewer_overview
+- aid: toornament:toornament-disciplines-api
+  name: Toornament Disciplines API
+  description: Access esports discipline metadata.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Disciplines
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-disciplines-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-matches-api
+  name: Toornament Matches API
+  description: Manage tournament matches and results.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Matches
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-matches-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-participants-api
+  name: Toornament Participants API
+  description: Manage tournament participants and registrations.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Participants
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-participants-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-rankings-api
+  name: Toornament Rankings API
+  description: Retrieve tournament rankings and standings.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Rankings
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-rankings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-registrations-api
+  name: Toornament Registrations API
+  description: Manage tournament registrations.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Registrations
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-registrations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-stages-api
+  name: Toornament Stages API
+  description: Manage tournament stages and brackets.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Stages
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-stages-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-tournaments-api
+  name: Toornament Tournaments API
+  description: Create, manage, and retrieve tournament information.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Tournaments
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-tournaments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
+- aid: toornament:toornament-webhooks-api
+  name: Toornament Webhooks API
+  description: Manage webhook subscriptions for tournament events.
+  humanURL: https://developer.toornament.com/v2/overview/get-started
+  baseURL: https://api.toornament.com/organizer/v2
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/toornament-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.toornament.com/v2/overview/get-started
+  - type: SpectralRules
+    url: rules/toornament-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/toornament-agentic-access.yml
