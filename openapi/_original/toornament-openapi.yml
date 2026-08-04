@@ -1,0 +1,1135 @@
+openapi: 3.1.0
+info:
+  title: Toornament API
+  description: >-
+    The Toornament API v2 provides comprehensive esports tournament management
+    capabilities. It includes the Organizer API for full tournament CRUD
+    operations, the Viewer API for public read-only tournament data access,
+    and the Participant API for registration and check-in management.
+    Authentication uses API key plus OAuth2 access tokens with scoped permissions.
+  version: "2.0"
+  contact:
+    name: Toornament Developer
+    url: https://developer.toornament.com
+  termsOfService: https://www.toornament.com/en_US/legal
+servers:
+  - url: https://api.toornament.com/organizer/v2
+    description: Organizer API — full tournament management (authenticated)
+  - url: https://api.toornament.com/viewer/v2
+    description: Viewer API — public read-only tournament access
+security:
+  - apiKey: []
+  - oauth2: []
+tags:
+  - name: Tournaments
+    description: Create, manage, and retrieve tournament information.
+  - name: Participants
+    description: Manage tournament participants and registrations.
+  - name: Stages
+    description: Manage tournament stages and brackets.
+  - name: Matches
+    description: Manage tournament matches and results.
+  - name: Rankings
+    description: Retrieve tournament rankings and standings.
+  - name: Registrations
+    description: Manage tournament registrations.
+  - name: Disciplines
+    description: Access esports discipline metadata.
+  - name: Webhooks
+    description: Manage webhook subscriptions for tournament events.
+paths:
+  /tournaments:
+    get:
+      operationId: listTournaments
+      summary: List Tournaments
+      description: Retrieve a paginated list of tournaments organized by the authenticated user. Supports filtering by discipline, status, dates, country, platform, and more.
+      tags:
+        - Tournaments
+      parameters:
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Toornament API key.
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: OAuth2 access token with organizer:view scope.
+        - name: Range
+          in: header
+          required: false
+          schema:
+            type: string
+          description: "Pagination range (e.g., tournaments=0-49, max 50 items)."
+        - name: disciplines
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated list of discipline keys to filter by.
+        - name: statuses
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated statuses (pending, running, completed).
+        - name: scheduled_before
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Filter tournaments scheduled before this date.
+        - name: scheduled_after
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Filter tournaments scheduled after this date.
+        - name: countries
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated ISO country codes to filter by.
+        - name: platforms
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated platform keys (pc, playstation, xbox, etc.).
+        - name: is_online
+          in: query
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+          description: Filter by online (1) or offline (0) tournaments.
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Sort field (e.g., created_at, scheduled_date_start).
+      responses:
+        "206":
+          description: Partial content — paginated list of tournaments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tournament"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    post:
+      operationId: createTournament
+      summary: Create Tournament
+      description: Create a new esports tournament. Requires organizer:admin OAuth2 scope.
+      tags:
+        - Tournaments
+      parameters:
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TournamentCreate"
+      responses:
+        "201":
+          description: Tournament created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          $ref: "#/components/responses/ValidationError"
+  /tournaments/{id}:
+    get:
+      operationId: getTournament
+      summary: Get Tournament
+      description: Retrieve the full details of a specific tournament by its ID.
+      tags:
+        - Tournaments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique tournament identifier.
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Tournament details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateTournament
+      summary: Update Tournament
+      description: Partially update tournament fields. Requires organizer:admin OAuth2 scope.
+      tags:
+        - Tournaments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TournamentUpdate"
+      responses:
+        "200":
+          description: Tournament updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: deleteTournament
+      summary: Delete Tournament
+      description: Permanently remove a tournament. Requires organizer:admin OAuth2 scope.
+      tags:
+        - Tournaments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Tournament deleted successfully.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /tournaments/{tournament_id}/participants:
+    get:
+      operationId: listParticipants
+      summary: List Participants
+      description: Retrieve a paginated list of participants for a tournament.
+      tags:
+        - Participants
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The tournament identifier.
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "206":
+          description: Paginated list of participants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createParticipant
+      summary: Create Participant
+      description: Add a new participant (player or team) to a tournament.
+      tags:
+        - Participants
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantCreate"
+      responses:
+        "201":
+          description: Participant created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /tournaments/{tournament_id}/participants/{id}:
+    get:
+      operationId: getParticipant
+      summary: Get Participant
+      description: Get details of a specific participant in a tournament.
+      tags:
+        - Participants
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Participant details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /tournaments/{tournament_id}/stages:
+    get:
+      operationId: listStages
+      summary: List Stages
+      description: Retrieve all stages defined for a tournament (e.g., group stage, bracket stage).
+      tags:
+        - Stages
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of stages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Stage"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /tournaments/{tournament_id}/stages/{stage_id}/matches:
+    get:
+      operationId: listMatches
+      summary: List Matches
+      description: Retrieve all matches within a tournament stage, including bracket display data.
+      tags:
+        - Matches
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: stage_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "206":
+          description: Paginated list of matches.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /tournaments/{tournament_id}/matches/{match_id}:
+    patch:
+      operationId: reportMatch
+      summary: Report Match Result
+      description: Submit or update the result for a specific match. Requires organizer:admin scope.
+      tags:
+        - Matches
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: match_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchReport"
+      responses:
+        "200":
+          description: Match result reported.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /tournaments/{tournament_id}/stages/{stage_id}/ranking-items:
+    get:
+      operationId: listRankingItems
+      summary: List Ranking Items
+      description: Retrieve the ranking items (standings) for a specific tournament stage.
+      tags:
+        - Rankings
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: stage_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Ranking items for the stage.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RankingItem"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /tournaments/{tournament_id}/registrations:
+    get:
+      operationId: listRegistrations
+      summary: List Registrations
+      description: Retrieve all registrations for a tournament including approval status.
+      tags:
+        - Registrations
+      parameters:
+        - name: tournament_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "206":
+          description: Paginated list of registrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Registration"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /disciplines:
+    get:
+      operationId: listDisciplines
+      summary: List Disciplines
+      description: Retrieve the list of all supported esports disciplines (games) on Toornament.
+      tags:
+        - Disciplines
+      parameters:
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "206":
+          description: Paginated list of disciplines.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Discipline"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List Webhooks
+      description: Retrieve all webhook subscriptions configured for the authenticated application.
+      tags:
+        - Webhooks
+      parameters:
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Webhook"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createWebhook
+      summary: Create Webhook
+      description: Register a new webhook endpoint to receive tournament event notifications.
+      tags:
+        - Webhooks
+      parameters:
+        - name: X-Api-Key
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookCreate"
+      responses:
+        "201":
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Webhook"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key obtained from the Toornament developer dashboard.
+    oauth2:
+      type: oauth2
+      description: OAuth2 access token with scoped permissions (organizer:view, organizer:admin).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.toornament.com/oauth/authorize
+          tokenUrl: https://api.toornament.com/oauth/v2/token
+          scopes:
+            organizer:view: Read access to organizer tournament data.
+            organizer:admin: Full administrative access to tournament management.
+            participant:manage: Manage participant registrations.
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: Insufficient OAuth2 scope for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ValidationError:
+      description: Request validation failed — missing or invalid fields.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    Tournament:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique tournament identifier.
+        discipline:
+          type: string
+          description: Esports discipline key (e.g., league-of-legends, valorant).
+        name:
+          type: string
+          description: Short tournament name.
+        full_name:
+          type: string
+          description: Full tournament name.
+        status:
+          type: string
+          enum: [pending, running, completed]
+          description: Current tournament status.
+        participant_type:
+          type: string
+          enum: [team, player]
+          description: Whether tournament is for teams or individual players.
+        size:
+          type: integer
+          description: Maximum number of participants.
+        online:
+          type: boolean
+          description: Whether the tournament is played online.
+        country:
+          type: string
+          description: ISO country code for the tournament location.
+        timezone:
+          type: string
+          description: Tournament timezone (IANA format).
+        scheduled_date_start:
+          type: string
+          format: date
+          description: Tournament start date.
+        scheduled_date_end:
+          type: string
+          format: date
+          description: Tournament end date.
+        registration_enabled:
+          type: boolean
+          description: Whether registration is currently open.
+        registration_opening_datetime:
+          type: string
+          format: date-time
+        registration_closing_datetime:
+          type: string
+          format: date-time
+        platforms:
+          type: array
+          items:
+            type: string
+          description: Gaming platforms (pc, playstation, xbox, switch, mobile).
+        website:
+          type: string
+          format: uri
+          description: Tournament website URL.
+        discord:
+          type: string
+          description: Discord server invite or ID.
+        description:
+          type: string
+          description: Tournament description.
+        rules:
+          type: string
+          description: Tournament rules text.
+        prize:
+          type: string
+          description: Prize pool description.
+        contact:
+          type: string
+          description: Contact email for the tournament.
+        public:
+          type: boolean
+          description: Whether the tournament is publicly visible.
+        archived:
+          type: boolean
+          description: Whether the tournament has been archived.
+        created_at:
+          type: string
+          format: date-time
+    TournamentCreate:
+      type: object
+      required:
+        - discipline
+        - name
+        - participant_type
+        - size
+        - timezone
+        - platforms
+      properties:
+        discipline:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+        participant_type:
+          type: string
+          enum: [team, player]
+        size:
+          type: integer
+        timezone:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        online:
+          type: boolean
+        country:
+          type: string
+        scheduled_date_start:
+          type: string
+          format: date
+        scheduled_date_end:
+          type: string
+          format: date
+        registration_enabled:
+          type: boolean
+        public:
+          type: boolean
+        description:
+          type: string
+        rules:
+          type: string
+        prize:
+          type: string
+        contact:
+          type: string
+        discord:
+          type: string
+        website:
+          type: string
+    TournamentUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        full_name:
+          type: string
+        status:
+          type: string
+        size:
+          type: integer
+        scheduled_date_start:
+          type: string
+          format: date
+        scheduled_date_end:
+          type: string
+          format: date
+        registration_enabled:
+          type: boolean
+        public:
+          type: boolean
+        archived:
+          type: boolean
+        description:
+          type: string
+        rules:
+          type: string
+        prize:
+          type: string
+        contact:
+          type: string
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique participant identifier.
+        tournament_id:
+          type: string
+        name:
+          type: string
+          description: Participant name (player username or team name).
+        type:
+          type: string
+          enum: [team, player]
+        email:
+          type: string
+          format: email
+        checked_in:
+          type: boolean
+          description: Whether the participant has checked in.
+        lineup:
+          type: array
+          items:
+            type: object
+            properties:
+              username:
+                type: string
+              name:
+                type: string
+          description: Team lineup for team tournaments.
+        custom_fields:
+          type: object
+          description: Custom registration field values.
+        created_at:
+          type: string
+          format: date-time
+    ParticipantCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        lineup:
+          type: array
+          items:
+            type: object
+        custom_fields:
+          type: object
+    Stage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique stage identifier.
+        tournament_id:
+          type: string
+        number:
+          type: integer
+          description: Stage number in the tournament flow.
+        name:
+          type: string
+          description: Stage name (e.g., Group Stage, Quarterfinals).
+        type:
+          type: string
+          description: Stage type (e.g., groups, single_elimination, double_elimination).
+        size:
+          type: integer
+          description: Number of participants in this stage.
+        status:
+          type: string
+          enum: [pending, running, completed]
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique match identifier.
+        tournament_id:
+          type: string
+        stage_id:
+          type: string
+        round_id:
+          type: string
+        group_id:
+          type: string
+        number:
+          type: integer
+          description: Match number within the stage.
+        status:
+          type: string
+          enum: [pending, running, completed]
+          description: Current match status.
+        scheduled_datetime:
+          type: string
+          format: date-time
+        played_at:
+          type: string
+          format: date-time
+        opponents:
+          type: array
+          maxItems: 2
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              participant:
+                $ref: "#/components/schemas/Participant"
+              result:
+                type: string
+                enum: [win, lose, draw]
+              score:
+                type: integer
+              forfeit:
+                type: boolean
+    MatchReport:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [completed]
+        opponents:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              result:
+                type: string
+                enum: [win, lose, draw]
+              score:
+                type: integer
+              forfeit:
+                type: boolean
+    RankingItem:
+      type: object
+      properties:
+        id:
+          type: string
+        position:
+          type: integer
+          description: Current ranking position.
+        participant:
+          $ref: "#/components/schemas/Participant"
+        properties:
+          type: object
+          properties:
+            played:
+              type: integer
+            win:
+              type: integer
+            draw:
+              type: integer
+            loss:
+              type: integer
+            score_for:
+              type: integer
+            score_against:
+              type: integer
+            points:
+              type: integer
+    Registration:
+      type: object
+      properties:
+        id:
+          type: string
+        tournament_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        status:
+          type: string
+          enum: [pending, accepted, refused, cancelled]
+        type:
+          type: string
+          enum: [team, player]
+        custom_fields:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+    Discipline:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Discipline identifier key (e.g., league-of-legends).
+        name:
+          type: string
+          description: Display name of the game/discipline.
+        full_name:
+          type: string
+          description: Full title of the game.
+        copyrights:
+          type: string
+          description: Copyright attribution text.
+        platforms:
+          type: array
+          items:
+            type: string
+          description: Supported gaming platforms.
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique webhook identifier.
+        url:
+          type: string
+          format: uri
+          description: Endpoint URL to deliver webhook payloads.
+        events:
+          type: array
+          items:
+            type: string
+          description: List of subscribed event types.
+        is_active:
+          type: boolean
+          description: Whether the webhook is active.
+        created_at:
+          type: string
+          format: date-time
+    WebhookCreate:
+      type: object
+      required:
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.

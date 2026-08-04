@@ -1,0 +1,28 @@
+{
+  "provider": "toornament",
+  "sources": [
+    "toornament-disciplines-api-openapi.yml",
+    "toornament-matches-api-openapi.yml",
+    "toornament-participants-api-openapi.yml",
+    "toornament-rankings-api-openapi.yml",
+    "toornament-registrations-api-openapi.yml",
+    "toornament-stages-api-openapi.yml",
+    "toornament-tournaments-api-openapi.yml",
+    "toornament-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "toornament-disciplines-api-openapi.yml",
+    "toornament-matches-api-openapi.yml",
+    "toornament-participants-api-openapi.yml",
+    "toornament-rankings-api-openapi.yml",
+    "toornament-registrations-api-openapi.yml",
+    "toornament-stages-api-openapi.yml",
+    "toornament-tournaments-api-openapi.yml",
+    "toornament-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
