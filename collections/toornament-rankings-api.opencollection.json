@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toornament Disciplines Rankings API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rankings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ranking Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/stages/:stage_id/ranking-items",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stage_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the ranking items (standings) for a specific tournament stage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

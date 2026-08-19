@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toornament Disciplines Participants API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Participants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path",
+                "description": "The tournament identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of participants for a tournament."
+        },
+        {
+          "info": {
+            "name": "Create Participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new participant (player or team) to a tournament."
+        },
+        {
+          "info": {
+            "name": "Get Participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:tournament_id/participants/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tournament_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a specific participant in a tournament."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

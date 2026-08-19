@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toornament Disciplines Tournaments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tournaments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tournaments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "disciplines",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of discipline keys to filter by."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated statuses (pending, running, completed)."
+              },
+              {
+                "name": "scheduled_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter tournaments scheduled before this date."
+              },
+              {
+                "name": "scheduled_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter tournaments scheduled after this date."
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated ISO country codes to filter by."
+              },
+              {
+                "name": "platforms",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated platform keys (pc, playstation, xbox, etc.)."
+              },
+              {
+                "name": "is_online",
+                "value": "",
+                "type": "query",
+                "description": "Filter by online (1) or offline (0) tournaments."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field (e.g., created_at, scheduled_date_start)."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of tournaments organized by the authenticated user. Supports filtering by discipline, status, dates, country, platform, and more."
+        },
+        {
+          "info": {
+            "name": "Create Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.toornament.com/organizer/v2/tournaments",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new esports tournament. Requires organizer:admin OAuth2 scope."
+        },
+        {
+          "info": {
+            "name": "Get Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique tournament identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the full details of a specific tournament by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update tournament fields. Requires organizer:admin OAuth2 scope."
+        },
+        {
+          "info": {
+            "name": "Delete Tournament",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.toornament.com/organizer/v2/tournaments/:id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently remove a tournament. Requires organizer:admin OAuth2 scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

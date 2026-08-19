@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toornament Disciplines API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disciplines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Disciplines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.toornament.com/organizer/v2/disciplines",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the list of all supported esports disciplines (games) on Toornament."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
