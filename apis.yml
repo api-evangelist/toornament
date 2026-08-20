@@ -45,6 +45,13 @@ apis:
   - Brackets
   - Esports
   - Gaming
+  - Read Only
+  - Tournaments
+  - Viewer
+  tags_raw:
+  - Brackets
+  - Esports
+  - Gaming
   - Read-Only
   - Tournaments
   - Viewer
@@ -155,6 +162,8 @@ apis:
   humanURL: https://developer.toornament.com/v2/overview/get-started
   baseURL: https://api.toornament.com/organizer/v2
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
