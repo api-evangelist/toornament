@@ -1,14 +1,7 @@
 {
   "provider": "toornament",
   "sources": [
-    "toornament-disciplines-api-openapi.yml",
-    "toornament-matches-api-openapi.yml",
-    "toornament-participants-api-openapi.yml",
-    "toornament-rankings-api-openapi.yml",
-    "toornament-registrations-api-openapi.yml",
-    "toornament-stages-api-openapi.yml",
-    "toornament-tournaments-api-openapi.yml",
-    "toornament-webhooks-api-openapi.yml"
+    "_original/toornament-openapi.yml"
   ],
   "outputs": [
     "toornament-disciplines-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "toornament-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "toornament-disciplines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-matches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-participants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-rankings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-registrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-stages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-tournaments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toornament-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
