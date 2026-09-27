@@ -249,32 +249,62 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Forbidden:
-      description: Insufficient OAuth2 scope for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed — missing or invalid API key/token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: Request validation failed — missing or invalid fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    TournamentCreate:
+      type: object
+      required:
+      - discipline
+      - name
+      - participant_type
+      - size
+      - timezone
+      - platforms
+      properties:
+        discipline:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+        participant_type:
+          type: string
+          enum:
+          - team
+          - player
+        size:
+          type: integer
+        timezone:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        online:
+          type: boolean
+        country:
+          type: string
+        scheduled_date_start:
+          type: string
+          format: date
+        scheduled_date_end:
+          type: string
+          format: date
+        registration_enabled:
+          type: boolean
+        public:
+          type: boolean
+        description:
+          type: string
+        rules:
+          type: string
+        prize:
+          type: string
+        contact:
+          type: string
+        discord:
+          type: string
+        website:
+          type: string
     Tournament:
       type: object
       properties:
@@ -365,61 +395,15 @@ components:
         created_at:
           type: string
           format: date-time
-    TournamentCreate:
+    Error:
       type: object
-      required:
-      - discipline
-      - name
-      - participant_type
-      - size
-      - timezone
-      - platforms
       properties:
-        discipline:
+        message:
           type: string
-        name:
+          description: Error message.
+        code:
           type: string
-        full_name:
-          type: string
-        participant_type:
-          type: string
-          enum:
-          - team
-          - player
-        size:
-          type: integer
-        timezone:
-          type: string
-        platforms:
-          type: array
-          items:
-            type: string
-        online:
-          type: boolean
-        country:
-          type: string
-        scheduled_date_start:
-          type: string
-          format: date
-        scheduled_date_end:
-          type: string
-          format: date
-        registration_enabled:
-          type: boolean
-        public:
-          type: boolean
-        description:
-          type: string
-        rules:
-          type: string
-        prize:
-          type: string
-        contact:
-          type: string
-        discord:
-          type: string
-        website:
-          type: string
+          description: Error code.
     TournamentUpdate:
       type: object
       properties:
@@ -451,15 +435,31 @@ components:
           type: string
         contact:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message.
-        code:
-          type: string
-          description: Error code.
+  responses:
+    ValidationError:
+      description: Request validation failed — missing or invalid fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient OAuth2 scope for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

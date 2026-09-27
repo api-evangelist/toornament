@@ -55,6 +55,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
     Stage:
       type: object
       properties:
@@ -81,15 +90,6 @@ components:
           - pending
           - running
           - completed
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message.
-        code:
-          type: string
-          description: Error code.
   responses:
     Unauthorized:
       description: Authentication failed — missing or invalid API key/token.

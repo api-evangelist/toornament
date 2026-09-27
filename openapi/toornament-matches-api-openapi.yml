@@ -148,30 +148,6 @@ components:
         created_at:
           type: string
           format: date-time
-    MatchReport:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - completed
-        opponents:
-          type: array
-          items:
-            type: object
-            properties:
-              number:
-                type: integer
-              result:
-                type: string
-                enum:
-                - win
-                - lose
-                - draw
-              score:
-                type: integer
-              forfeit:
-                type: boolean
     Error:
       type: object
       properties:
@@ -221,6 +197,30 @@ components:
                 type: integer
               participant:
                 $ref: '#/components/schemas/Participant'
+              result:
+                type: string
+                enum:
+                - win
+                - lose
+                - draw
+              score:
+                type: integer
+              forfeit:
+                type: boolean
+    MatchReport:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - completed
+        opponents:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
               result:
                 type: string
                 enum:

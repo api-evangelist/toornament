@@ -81,13 +81,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed — missing or invalid API key/token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     WebhookCreate:
       type: object
@@ -102,6 +95,15 @@ components:
           type: array
           items:
             type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
     Webhook:
       type: object
       properties:
@@ -123,15 +125,13 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message.
-        code:
-          type: string
-          description: Error code.
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey
