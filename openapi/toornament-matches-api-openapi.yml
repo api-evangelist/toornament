@@ -110,6 +110,30 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    MatchReport:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - completed
+        opponents:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              result:
+                type: string
+                enum:
+                - win
+                - lose
+                - draw
+              score:
+                type: integer
+              forfeit:
+                type: boolean
     Participant:
       type: object
       properties:
@@ -197,30 +221,6 @@ components:
                 type: integer
               participant:
                 $ref: '#/components/schemas/Participant'
-              result:
-                type: string
-                enum:
-                - win
-                - lose
-                - draw
-              score:
-                type: integer
-              forfeit:
-                type: boolean
-    MatchReport:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - completed
-        opponents:
-          type: array
-          items:
-            type: object
-            properties:
-              number:
-                type: integer
               result:
                 type: string
                 enum:

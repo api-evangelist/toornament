@@ -173,15 +173,6 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message.
-        code:
-          type: string
-          description: Error code.
     ParticipantCreate:
       type: object
       required:
@@ -197,6 +188,15 @@ components:
             type: object
         custom_fields:
           type: object
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
   responses:
     NotFound:
       description: The requested resource was not found.

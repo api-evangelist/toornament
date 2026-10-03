@@ -50,15 +50,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message.
-        code:
-          type: string
-          description: Error code.
     Discipline:
       type: object
       properties:
@@ -79,6 +70,15 @@ components:
           items:
             type: string
           description: Supported gaming platforms.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message.
+        code:
+          type: string
+          description: Error code.
   responses:
     Unauthorized:
       description: Authentication failed — missing or invalid API key/token.
