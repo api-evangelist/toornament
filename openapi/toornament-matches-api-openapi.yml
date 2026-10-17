@@ -109,20 +109,31 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed — missing or invalid API key/token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    MatchReport:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - completed
+        opponents:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: integer
+              result:
+                type: string
+                enum:
+                - win
+                - lose
+                - draw
+              score:
+                type: integer
+              forfeit:
+                type: boolean
     Match:
       type: object
       properties:
@@ -211,30 +222,6 @@ components:
         created_at:
           type: string
           format: date-time
-    MatchReport:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - completed
-        opponents:
-          type: array
-          items:
-            type: object
-            properties:
-              number:
-                type: integer
-              result:
-                type: string
-                enum:
-                - win
-                - lose
-                - draw
-              score:
-                type: integer
-              forfeit:
-                type: boolean
     Error:
       type: object
       properties:
@@ -244,6 +231,19 @@ components:
         code:
           type: string
           description: Error code.
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

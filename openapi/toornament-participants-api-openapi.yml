@@ -134,20 +134,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed — missing or invalid API key/token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ParticipantCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        lineup:
+          type: array
+          items:
+            type: object
+        custom_fields:
+          type: object
     Participant:
       type: object
       properties:
@@ -186,21 +188,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ParticipantCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        lineup:
-          type: array
-          items:
-            type: object
-        custom_fields:
-          type: object
     Error:
       type: object
       properties:
@@ -210,6 +197,19 @@ components:
         code:
           type: string
           description: Error code.
+  responses:
+    Unauthorized:
+      description: Authentication failed — missing or invalid API key/token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey
