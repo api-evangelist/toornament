@@ -191,6 +191,8 @@ apis:
   - type: SpectralRules
     url: rules/toornament-rules.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/toornament/overview
   - type: Plans
     url: plans/toornament-plans-pricing.yml
   - type: RateLimits
