@@ -1,180 +1,165 @@
 {
+  "info": {
+    "_postman_id": "d38fc889-6c4b-456c-8dab-ccea4cc03b45",
+    "name": "Toornament Disciplines API",
+    "description": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:51:39.000Z",
+    "updatedAt": "2026-10-21T19:51:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d38fc889-6c4b-456c-8dab-ccea4cc03b45"
+  },
   "item": [
     {
-      "id": "28185444-32eb-4446-8800-233b3b9e1b81",
-      "name": "Disciplines",
-      "description": {
-        "content": "Access esports discipline metadata.",
-        "type": "text/plain"
-      },
+      "name": "disciplines",
       "item": [
         {
-          "id": "5eb78e1a-a6bf-48d8-88e1-d5a3de3b7c43",
           "name": "List Disciplines",
+          "id": "0f7fd37b-84e2-424d-9a2f-1898c7697593",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List Disciplines",
-            "description": {
-              "content": "Retrieve the list of all supported esports disciplines (games) on Toornament.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "disciplines"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) ",
                 "key": "X-Api-Key",
                 "value": "<string>"
               },
               {
-                "disabled": false,
                 "key": "Range",
-                "value": "<string>",
-                "description": ""
+                "value": "<string>"
               },
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/disciplines",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "disciplines"
+              ]
+            },
+            "description": "Retrieve the list of all supported esports disciplines (games) on Toornament."
           },
           "response": [
             {
-              "id": "cf0a92fc-54a8-45bd-b9e7-1533238a867f",
+              "id": "c166fa87-91bc-490d-a30f-c60b3e5681b3",
               "name": "Paginated list of disciplines.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "disciplines"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) ",
                     "key": "X-Api-Key",
                     "value": "<string>"
                   },
                   {
-                    "disabled": false,
                     "key": "Range",
-                    "value": "<string>",
-                    "description": ""
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/disciplines",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disciplines"
+                  ]
+                }
               },
               "status": "Partial Content",
               "code": 206,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"full_name\": \"string\",\n    \"copyrights\": \"string\",\n    \"platforms\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"full_name\": \"string\",\n    \"copyrights\": \"string\",\n    \"platforms\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"full_name\": \"<string>\",\n    \"copyrights\": \"<string>\",\n    \"platforms\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"full_name\": \"<string>\",\n    \"copyrights\": \"<string>\",\n    \"platforms\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-10-21T19:51:40.000Z",
+              "updatedAt": "2026-10-21T19:51:40.000Z",
+              "uid": "35240-c166fa87-91bc-490d-a30f-c60b3e5681b3"
             },
             {
-              "id": "1d46d7c5-e30f-43da-89d7-bf78a22e34d5",
-              "name": "Authentication failed — missing or invalid API key/token.",
+              "id": "d7d75d3f-0e16-4ba4-bfc5-edc8cd8ea903",
+              "name": "Authentication failed \u2014 missing or invalid API key/token.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "disciplines"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) ",
                     "key": "X-Api-Key",
                     "value": "<string>"
                   },
                   {
-                    "disabled": false,
                     "key": "Range",
-                    "value": "<string>",
-                    "description": ""
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/disciplines",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disciplines"
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T19:51:40.000Z",
+              "updatedAt": "2026-10-21T19:51:40.000Z",
+              "uid": "35240-d7d75d3f-0e16-4ba4-bfc5-edc8cd8ea903"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T19:51:40.000Z",
+          "updatedAt": "2026-10-21T19:51:40.000Z",
+          "uid": "35240-0f7fd37b-84e2-424d-9a2f-1898c7697593"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.toornament.com/organizer/v2",
-      "key": "baseUrl"
+      "id": "886f1365-31c2-4efa-b0f3-75d6ef59ba69",
+      "createdAt": "2026-10-21T19:51:40.000Z",
+      "updatedAt": "2026-10-21T19:51:40.000Z",
+      "uid": "35240-886f1365-31c2-4efa-b0f3-75d6ef59ba69"
     }
   ],
   "auth": {
@@ -182,25 +167,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Api-Key"
+        "value": "X-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "db1ef714-5e64-4ec6-b60c-8eadf7ecc579",
-    "name": "Toornament Disciplines API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.toornament.com/organizer/v2"
     }
-  }
+  ]
 }

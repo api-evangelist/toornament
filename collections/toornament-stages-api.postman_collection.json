@@ -1,204 +1,195 @@
 {
+  "info": {
+    "_postman_id": "fa4a4637-bf5b-40a2-9782-f34404889f4c",
+    "name": "Toornament Stages API",
+    "description": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:52:10.000Z",
+    "updatedAt": "2026-10-21T19:52:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fa4a4637-bf5b-40a2-9782-f34404889f4c"
+  },
   "item": [
     {
-      "id": "65d08f71-bee9-46ae-a4ac-5d939d870fd8",
-      "name": "Stages",
-      "description": {
-        "content": "Manage tournament stages and brackets.",
-        "type": "text/plain"
-      },
+      "name": "tournaments",
       "item": [
         {
-          "id": "e85e536e-7752-40ca-ba17-745af957a439",
-          "name": "List Stages",
-          "request": {
-            "name": "List Stages",
-            "description": {
-              "content": "Retrieve all stages defined for a tournament (e.g., group stage, bracket stage).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "stages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{tournament_id}",
+          "item": [
             {
-              "id": "21e15c2c-b484-46d4-8ec9-13226d06e55f",
-              "name": "List of stages.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "stages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "stages",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "List Stages",
+                  "id": "302d2648-61d0-488d-8212-649edd969aad",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tournaments/:tournament_id/stages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tournaments",
+                        ":tournament_id",
+                        "stages"
+                      ],
+                      "variable": [
+                        {
+                          "id": "be24951a-ea4b-4aa4-b0c1-770350139db0",
+                          "key": "tournament_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all stages defined for a tournament (e.g., group stage, bracket stage)."
+                  },
+                  "response": [
+                    {
+                      "id": "265c9425-1a5a-4061-b0d3-5a9dc2f92687",
+                      "name": "List of stages.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/stages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "stages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"number\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"size\": \"<integer>\",\n    \"status\": \"pending\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"number\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"size\": \"<integer>\",\n    \"status\": \"pending\"\n  }\n]",
+                      "createdAt": "2026-10-21T19:52:11.000Z",
+                      "updatedAt": "2026-10-21T19:52:11.000Z",
+                      "uid": "35240-265c9425-1a5a-4061-b0d3-5a9dc2f92687"
+                    },
+                    {
+                      "id": "290a9d81-2fce-4e4f-a80a-9e51666e0971",
+                      "name": "Authentication failed \u2014 missing or invalid API key/token.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/stages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "stages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:52:11.000Z",
+                      "updatedAt": "2026-10-21T19:52:11.000Z",
+                      "uid": "35240-290a9d81-2fce-4e4f-a80a-9e51666e0971"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:52:11.000Z",
+                  "updatedAt": "2026-10-21T19:52:11.000Z",
+                  "uid": "35240-302d2648-61d0-488d-8212-649edd969aad"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"number\": 8845,\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"size\": 7693,\n    \"status\": \"running\"\n  },\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"number\": 2252,\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"size\": 266,\n    \"status\": \"pending\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e15f528c-8743-4c06-a101-f61d80694eb9",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "stages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "a733d91e-7e92-48be-9a8d-1e7ad0b40831",
+              "createdAt": "2026-10-21T19:52:11.000Z",
+              "updatedAt": "2026-10-21T19:52:11.000Z",
+              "uid": "35240-a733d91e-7e92-48be-9a8d-1e7ad0b40831"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "da73f1e8-a7c3-41dc-8983-cee64c7bfb92",
+          "createdAt": "2026-10-21T19:52:11.000Z",
+          "updatedAt": "2026-10-21T19:52:11.000Z",
+          "uid": "35240-da73f1e8-a7c3-41dc-8983-cee64c7bfb92"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.toornament.com/organizer/v2",
-      "key": "baseUrl"
+      "id": "23a8569e-256f-461d-8eb7-e073dbca306a",
+      "createdAt": "2026-10-21T19:52:11.000Z",
+      "updatedAt": "2026-10-21T19:52:11.000Z",
+      "uid": "35240-23a8569e-256f-461d-8eb7-e073dbca306a"
     }
   ],
   "auth": {
@@ -206,25 +197,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Api-Key"
+        "value": "X-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "a214787f-900d-46b2-b88c-01c1dad8cb73",
-    "name": "Toornament Disciplines Stages API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.toornament.com/organizer/v2"
     }
-  }
+  ]
 }

@@ -1,637 +1,581 @@
 {
+  "info": {
+    "_postman_id": "560b5b98-8dcd-476c-be0f-98b71eb036dc",
+    "name": "Toornament Participants API",
+    "description": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:51:51.000Z",
+    "updatedAt": "2026-10-21T19:51:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-560b5b98-8dcd-476c-be0f-98b71eb036dc"
+  },
   "item": [
     {
-      "id": "84e7ca84-eb28-4617-bc4c-72e1aeb58db9",
-      "name": "Participants",
-      "description": {
-        "content": "Manage tournament participants and registrations.",
-        "type": "text/plain"
-      },
+      "name": "tournaments",
       "item": [
         {
-          "id": "9b7d6e15-0f66-43bc-a424-08754c85d232",
-          "name": "List Participants",
-          "request": {
-            "name": "List Participants",
-            "description": {
-              "content": "Retrieve a paginated list of participants for a tournament.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "participants"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) The tournament identifier."
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "disabled": false,
-                "key": "Range",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{tournament_id}",
+          "item": [
             {
-              "id": "93c9b1de-d3db-4fb4-9c0c-97a10cc96e69",
-              "name": "Paginated list of participants.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) The tournament identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Range",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Partial Content",
-              "code": 206,
-              "header": [
+              "name": "participants",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get Participant",
+                      "id": "b3f9837f-45ae-4cf0-b372-f4cd4f5bb26e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/participants/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "participants",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "76c9d968-ccaf-4565-922f-8e32c7e032e9",
+                              "key": "tournament_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "a689c82d-62f8-4b53-aa4b-8e41df0f4c0b",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get details of a specific participant in a tournament."
+                      },
+                      "response": [
+                        {
+                          "id": "015ca469-ddc5-4421-ab19-ef4a4430f9ad",
+                          "name": "Participant details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Api-Key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/participants/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "participants",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tournament_id"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"tournament_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"player\",\n  \"email\": \"<email>\",\n  \"checked_in\": \"<boolean>\",\n  \"lineup\": [\n    {\n      \"username\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"custom_fields\": {},\n  \"created_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-10-21T19:51:52.000Z",
+                          "updatedAt": "2026-10-21T19:51:52.000Z",
+                          "uid": "35240-015ca469-ddc5-4421-ab19-ef4a4430f9ad"
+                        },
+                        {
+                          "id": "9eb58d8c-f3a5-4414-a69b-ce3d6bda075e",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Api-Key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/participants/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "participants",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tournament_id"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:52.000Z",
+                          "updatedAt": "2026-10-21T19:51:52.000Z",
+                          "uid": "35240-9eb58d8c-f3a5-4414-a69b-ce3d6bda075e"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:51:52.000Z",
+                      "updatedAt": "2026-10-21T19:51:52.000Z",
+                      "uid": "35240-b3f9837f-45ae-4cf0-b372-f4cd4f5bb26e"
+                    }
+                  ],
+                  "id": "672696a7-4632-450b-9585-696370dbfa50",
+                  "createdAt": "2026-10-21T19:51:52.000Z",
+                  "updatedAt": "2026-10-21T19:51:52.000Z",
+                  "uid": "35240-672696a7-4632-450b-9585-696370dbfa50"
+                },
+                {
+                  "name": "List Participants",
+                  "id": "0ce7d2b3-3a65-47da-b821-d09ed2cbc637",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Range",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tournaments",
+                        ":tournament_id",
+                        "participants"
+                      ],
+                      "variable": [
+                        {
+                          "id": "24548429-2f3c-4389-b3fa-3ba8282ed81d",
+                          "key": "tournament_id",
+                          "value": "<string>",
+                          "description": "(Required) The tournament identifier."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a paginated list of participants for a tournament."
+                  },
+                  "response": [
+                    {
+                      "id": "b7db5f50-7437-4ec6-9cfc-5624cf4c425f",
+                      "name": "Paginated list of participants.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Range",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "participants"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Partial Content",
+                      "code": 206,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"player\",\n    \"email\": \"<email>\",\n    \"checked_in\": \"<boolean>\",\n    \"lineup\": [\n      {\n        \"username\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"custom_fields\": {},\n    \"created_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"player\",\n    \"email\": \"<email>\",\n    \"checked_in\": \"<boolean>\",\n    \"lineup\": [\n      {\n        \"username\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"custom_fields\": {},\n    \"created_at\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-10-21T19:51:52.000Z",
+                      "updatedAt": "2026-10-21T19:51:52.000Z",
+                      "uid": "35240-b7db5f50-7437-4ec6-9cfc-5624cf4c425f"
+                    },
+                    {
+                      "id": "7d6ebfb4-c89c-4fb3-a43f-445c468639f9",
+                      "name": "Authentication failed \u2014 missing or invalid API key/token.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Range",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "participants"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:52.000Z",
+                      "updatedAt": "2026-10-21T19:51:52.000Z",
+                      "uid": "35240-7d6ebfb4-c89c-4fb3-a43f-445c468639f9"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:51:52.000Z",
+                  "updatedAt": "2026-10-21T19:51:52.000Z",
+                  "uid": "35240-0ce7d2b3-3a65-47da-b821-d09ed2cbc637"
+                },
+                {
+                  "name": "Create Participant",
+                  "id": "8f491696-ecb1-4478-a12c-8c1d95aa6d97",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"custom_fields\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tournaments",
+                        ":tournament_id",
+                        "participants"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e97f9b03-9ad2-44cb-892d-aa09a27e2492",
+                          "key": "tournament_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Add a new participant (player or team) to a tournament."
+                  },
+                  "response": [
+                    {
+                      "id": "c190256e-ab66-40f8-b9b1-0c1933a51c70",
+                      "name": "Participant created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"custom_fields\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "participants"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"tournament_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"player\",\n  \"email\": \"<email>\",\n  \"checked_in\": \"<boolean>\",\n  \"lineup\": [\n    {\n      \"username\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"custom_fields\": {},\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-21T19:51:52.000Z",
+                      "updatedAt": "2026-10-21T19:51:52.000Z",
+                      "uid": "35240-c190256e-ab66-40f8-b9b1-0c1933a51c70"
+                    },
+                    {
+                      "id": "c776928c-9dc2-400a-8ee1-abd34ca4f560",
+                      "name": "Authentication failed \u2014 missing or invalid API key/token.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Api-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"custom_fields\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/participants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "participants"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tournament_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:52.000Z",
+                      "updatedAt": "2026-10-21T19:51:52.000Z",
+                      "uid": "35240-c776928c-9dc2-400a-8ee1-abd34ca4f560"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:51:52.000Z",
+                  "updatedAt": "2026-10-21T19:51:52.000Z",
+                  "uid": "35240-8f491696-ecb1-4478-a12c-8c1d95aa6d97"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"player\",\n    \"email\": \"qEXKXDtr@vunI.yi\",\n    \"checked_in\": true,\n    \"lineup\": [\n      {\n        \"username\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"username\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"custom_fields\": {},\n    \"created_at\": \"1958-11-06T05:06:21.839Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"team\",\n    \"email\": \"By8p0SnQUEtb@wXDZHZUYLLCRvOoeLKNraeokYhd.rk\",\n    \"checked_in\": false,\n    \"lineup\": [\n      {\n        \"username\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"username\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"custom_fields\": {},\n    \"created_at\": \"1957-01-24T19:34:17.316Z\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b17efaf2-2469-47bd-a85d-f3e6ea795a00",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) The tournament identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Range",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "a330c6e4-c2ea-4d38-9f42-c96839fd5990",
+              "createdAt": "2026-10-21T19:51:52.000Z",
+              "updatedAt": "2026-10-21T19:51:52.000Z",
+              "uid": "35240-a330c6e4-c2ea-4d38-9f42-c96839fd5990"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e5f60119-7aa6-460d-8a3e-cb88be7e2215",
-          "name": "Create Participant",
-          "request": {
-            "name": "Create Participant",
-            "description": {
-              "content": "Add a new participant (player or team) to a tournament.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "participants"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"lineup\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"custom_fields\": \"<object>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f2a52bc9-031a-4627-b89d-e9ecd7d04ef2",
-              "name": "Participant created.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"lineup\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"custom_fields\": \"<object>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"tournament_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"team\",\n  \"email\": \"BfjsBYH0PRZ@SMniKYs.bcp\",\n  \"checked_in\": true,\n  \"lineup\": [\n    {\n      \"username\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"username\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"custom_fields\": {},\n  \"created_at\": \"2014-10-24T22:10:11.430Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "31647008-7077-4c1f-a5e7-3c38171e964d",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"lineup\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"custom_fields\": \"<object>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "00a12516-87b7-433c-88db-6f1a7514bbc7",
-          "name": "Get Participant",
-          "request": {
-            "name": "Get Participant",
-            "description": {
-              "content": "Get details of a specific participant in a tournament.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "participants",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6f62db42-3acd-457e-84c7-d71b52e96e12",
-              "name": "Participant details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"tournament_id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"team\",\n  \"email\": \"BfjsBYH0PRZ@SMniKYs.bcp\",\n  \"checked_in\": true,\n  \"lineup\": [\n    {\n      \"username\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"username\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"custom_fields\": {},\n  \"created_at\": \"2014-10-24T22:10:11.430Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cc20f93c-c1c0-48e3-949b-2495c33f3f2f",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0ca49a90-2392-46c7-ab9d-091f1f73c3d1",
+          "createdAt": "2026-10-21T19:51:52.000Z",
+          "updatedAt": "2026-10-21T19:51:52.000Z",
+          "uid": "35240-0ca49a90-2392-46c7-ab9d-091f1f73c3d1"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.toornament.com/organizer/v2",
-      "key": "baseUrl"
+      "id": "370ebf9d-6ae7-4dcc-b823-f986ab37b7b9",
+      "createdAt": "2026-10-21T19:51:52.000Z",
+      "updatedAt": "2026-10-21T19:51:52.000Z",
+      "uid": "35240-370ebf9d-6ae7-4dcc-b823-f986ab37b7b9"
     }
   ],
   "auth": {
@@ -639,25 +583,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Api-Key"
+        "value": "X-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "fe627b5e-0972-49f2-acf2-e1521c4d6cc4",
-    "name": "Toornament Disciplines Participants API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.toornament.com/organizer/v2"
     }
-  }
+  ]
 }

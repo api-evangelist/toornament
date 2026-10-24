@@ -1,35 +1,28 @@
 {
+  "info": {
+    "_postman_id": "49b59022-ce0f-4b0f-9537-87d2bb9beb9d",
+    "name": "Toornament Webhooks API",
+    "description": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:52:23.000Z",
+    "updatedAt": "2026-10-21T19:52:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-49b59022-ce0f-4b0f-9537-87d2bb9beb9d"
+  },
   "item": [
     {
-      "id": "b8f41a35-10ef-456f-91c7-8a74a4db368f",
-      "name": "Webhooks",
-      "description": {
-        "content": "Manage webhook subscriptions for tournament events.",
-        "type": "text/plain"
-      },
+      "name": "webhooks",
       "item": [
         {
-          "id": "bb8e73ed-b151-487b-b1d8-54656ead4ae3",
           "name": "List Webhooks",
+          "id": "798cf8b2-73a6-4723-83fd-d480443b3b14",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List Webhooks",
-            "description": {
-              "content": "Retrieve all webhook subscriptions configured for the authenticated application.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "webhooks"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) ",
                 "key": "X-Api-Key",
                 "value": "<string>"
@@ -39,148 +32,127 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fb1c8c9e-a4f9-4430-b59f-472657b36f9a",
-              "name": "List of webhook subscriptions.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "webhooks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"url\": \"https://sKAlwpeeMnaznCK.cxuU7CjCpKDygYQxPBPGf9UsK4BPuf0onMJ\",\n    \"events\": [\n      \"string\",\n      \"string\"\n    ],\n    \"is_active\": true,\n    \"created_at\": \"1977-07-17T20:55:25.188Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"url\": \"https://ckYL.xzuBn6EBMtxQGIeZCtJ\",\n    \"events\": [\n      \"string\",\n      \"string\"\n    ],\n    \"is_active\": true,\n    \"created_at\": \"1964-05-14T19:08:22.325Z\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "853fc8ff-1824-4d41-8e8c-42cdaa37a34e",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "webhooks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "eccc71cd-dd72-4d0c-a478-2a3ec1cabb2a",
-          "name": "Create Webhook",
-          "request": {
-            "name": "Create Webhook",
-            "description": {
-              "content": "Register a new webhook endpoint to receive tournament event notifications.",
-              "type": "text/plain"
-            },
             "url": {
-              "path": [
-                "webhooks"
-              ],
+              "raw": "{{baseUrl}}/webhooks",
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
-              "variable": []
+              "path": [
+                "webhooks"
+              ]
             },
+            "description": "Retrieve all webhook subscriptions configured for the authenticated application."
+          },
+          "response": [
+            {
+              "id": "bb81613d-1eec-404c-aa99-3af65ebd75da",
+              "name": "List of webhook subscriptions.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"is_active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"is_active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\"\n  }\n]",
+              "createdAt": "2026-10-21T19:52:23.000Z",
+              "updatedAt": "2026-10-21T19:52:23.000Z",
+              "uid": "35240-bb81613d-1eec-404c-aa99-3af65ebd75da"
+            },
+            {
+              "id": "8ffe762a-af95-4f7b-b983-7e041c6c238b",
+              "name": "Authentication failed \u2014 missing or invalid API key/token.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T19:52:23.000Z",
+              "updatedAt": "2026-10-21T19:52:23.000Z",
+              "uid": "35240-8ffe762a-af95-4f7b-b983-7e041c6c238b"
+            }
+          ],
+          "createdAt": "2026-10-21T19:52:23.000Z",
+          "updatedAt": "2026-10-21T19:52:23.000Z",
+          "uid": "35240-798cf8b2-73a6-4723-83fd-d480443b3b14"
+        },
+        {
+          "name": "Create Webhook",
+          "id": "6b59e59c-3bc1-4715-a7e7-99e1f13e1f3a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) ",
                 "key": "X-Api-Key",
                 "value": "<string>"
@@ -194,161 +166,160 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Register a new webhook endpoint to receive tournament event notifications."
           },
           "response": [
             {
-              "id": "b04acfe6-ec90-4a0c-ab55-d4bbb86be23a",
+              "id": "a38870d2-2a79-4600-ab81-df02cfa903ee",
               "name": "Webhook created.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "webhooks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) ",
                     "key": "X-Api-Key",
                     "value": "<string>"
                   },
                   {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"url\": \"http://wm.rcxjnpGUgSxQ9WOKfPXJDzkp5t0pCKfJOlcVgwaynG9eD0ewDLscnkRTGm0Wx9j1C\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"is_active\": false,\n  \"created_at\": \"1950-07-26T18:45:32.051Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_active\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-21T19:52:23.000Z",
+              "updatedAt": "2026-10-21T19:52:23.000Z",
+              "uid": "35240-a38870d2-2a79-4600-ab81-df02cfa903ee"
             },
             {
-              "id": "e4a8bc85-d719-4641-9075-20498666ddbc",
-              "name": "Authentication failed — missing or invalid API key/token.",
+              "id": "6300d942-7cff-4741-b6f9-850516090a61",
+              "name": "Authentication failed \u2014 missing or invalid API key/token.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "webhooks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) ",
                     "key": "X-Api-Key",
                     "value": "<string>"
                   },
                   {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T19:52:23.000Z",
+              "updatedAt": "2026-10-21T19:52:23.000Z",
+              "uid": "35240-6300d942-7cff-4741-b6f9-850516090a61"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T19:52:23.000Z",
+          "updatedAt": "2026-10-21T19:52:23.000Z",
+          "uid": "35240-6b59e59c-3bc1-4715-a7e7-99e1f13e1f3a"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.toornament.com/organizer/v2",
-      "key": "baseUrl"
+      "id": "57efcce8-d8f0-46dd-9530-6d8837bab2bf",
+      "createdAt": "2026-10-21T19:52:23.000Z",
+      "updatedAt": "2026-10-21T19:52:23.000Z",
+      "uid": "35240-57efcce8-d8f0-46dd-9530-6d8837bab2bf"
     }
   ],
   "auth": {
@@ -356,25 +327,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Api-Key"
+        "value": "X-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4f80b385-721c-4858-880a-f2191830dc74",
-    "name": "Toornament Disciplines Webhooks API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.toornament.com/organizer/v2"
     }
-  }
+  ]
 }

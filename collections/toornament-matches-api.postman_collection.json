@@ -1,564 +1,544 @@
 {
+  "info": {
+    "_postman_id": "94d7d307-f57e-498f-aa44-9792b3e2c2b9",
+    "name": "Toornament Matches API",
+    "description": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:51:46.000Z",
+    "updatedAt": "2026-10-21T19:51:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-94d7d307-f57e-498f-aa44-9792b3e2c2b9"
+  },
   "item": [
     {
-      "id": "21314fdc-8121-4190-9fe2-a9bc2dabeaf0",
-      "name": "Matches",
-      "description": {
-        "content": "Manage tournament matches and results.",
-        "type": "text/plain"
-      },
+      "name": "tournaments",
       "item": [
         {
-          "id": "a4ba9a4b-311f-4f70-ba23-72ede9324bc6",
-          "name": "List Matches",
-          "request": {
-            "name": "List Matches",
-            "description": {
-              "content": "Retrieve all matches within a tournament stage, including bracket display data.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "stages",
-                ":stage_id",
-                "matches"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stage_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "disabled": false,
-                "key": "Range",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{tournament_id}",
+          "item": [
             {
-              "id": "969aa060-a75f-4fa7-ad27-4e1a9d8b8aba",
-              "name": "Paginated list of matches.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "stages",
-                    ":stage_id",
-                    "matches"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stage_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Range",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Partial Content",
-              "code": 206,
-              "header": [
+              "name": "stages",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{stage_id}",
+                  "item": [
+                    {
+                      "name": "matches",
+                      "item": [
+                        {
+                          "name": "List Matches",
+                          "id": "10ec38f3-86d0-479e-be01-9ec80a99e45c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Range",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/stages/:stage_id/matches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "stages",
+                                ":stage_id",
+                                "matches"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a480ac67-4178-47a1-b8a5-5d6e97e4a453",
+                                  "key": "tournament_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "421ba5f2-8d54-4a62-9e94-b5f9290fa074",
+                                  "key": "stage_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve all matches within a tournament stage, including bracket display data."
+                          },
+                          "response": [
+                            {
+                              "id": "37e3057a-33ac-4560-b16d-ca4825b7281d",
+                              "name": "Paginated list of matches.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Range",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Api-Key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tournaments/:tournament_id/stages/:stage_id/matches",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tournaments",
+                                    ":tournament_id",
+                                    "stages",
+                                    ":stage_id",
+                                    "matches"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tournament_id"
+                                    },
+                                    {
+                                      "key": "stage_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Partial Content",
+                              "code": 206,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"stage_id\": \"<string>\",\n    \"round_id\": \"<string>\",\n    \"group_id\": \"<string>\",\n    \"number\": \"<integer>\",\n    \"status\": \"running\",\n    \"scheduled_datetime\": \"<dateTime>\",\n    \"played_at\": \"<dateTime>\",\n    \"opponents\": [\n      {\n        \"number\": \"<integer>\",\n        \"participant\": {\n          \"id\": \"<string>\",\n          \"tournament_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"player\",\n          \"email\": \"<email>\",\n          \"checked_in\": \"<boolean>\",\n          \"lineup\": [\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"<dateTime>\"\n        },\n        \"result\": \"draw\",\n        \"score\": \"<integer>\",\n        \"forfeit\": \"<boolean>\"\n      },\n      {\n        \"number\": \"<integer>\",\n        \"participant\": {\n          \"id\": \"<string>\",\n          \"tournament_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"team\",\n          \"email\": \"<email>\",\n          \"checked_in\": \"<boolean>\",\n          \"lineup\": [\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"<dateTime>\"\n        },\n        \"result\": \"draw\",\n        \"score\": \"<integer>\",\n        \"forfeit\": \"<boolean>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"tournament_id\": \"<string>\",\n    \"stage_id\": \"<string>\",\n    \"round_id\": \"<string>\",\n    \"group_id\": \"<string>\",\n    \"number\": \"<integer>\",\n    \"status\": \"pending\",\n    \"scheduled_datetime\": \"<dateTime>\",\n    \"played_at\": \"<dateTime>\",\n    \"opponents\": [\n      {\n        \"number\": \"<integer>\",\n        \"participant\": {\n          \"id\": \"<string>\",\n          \"tournament_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"team\",\n          \"email\": \"<email>\",\n          \"checked_in\": \"<boolean>\",\n          \"lineup\": [\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"<dateTime>\"\n        },\n        \"result\": \"draw\",\n        \"score\": \"<integer>\",\n        \"forfeit\": \"<boolean>\"\n      },\n      {\n        \"number\": \"<integer>\",\n        \"participant\": {\n          \"id\": \"<string>\",\n          \"tournament_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"team\",\n          \"email\": \"<email>\",\n          \"checked_in\": \"<boolean>\",\n          \"lineup\": [\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            {\n              \"username\": \"<string>\",\n              \"name\": \"<string>\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"<dateTime>\"\n        },\n        \"result\": \"win\",\n        \"score\": \"<integer>\",\n        \"forfeit\": \"<boolean>\"\n      }\n    ]\n  }\n]",
+                              "createdAt": "2026-10-21T19:51:46.000Z",
+                              "updatedAt": "2026-10-21T19:51:46.000Z",
+                              "uid": "35240-37e3057a-33ac-4560-b16d-ca4825b7281d"
+                            },
+                            {
+                              "id": "17bd4412-5d81-45fc-aaaf-ffdb2ab48fbf",
+                              "name": "Authentication failed \u2014 missing or invalid API key/token.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "X-Api-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Range",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Api-Key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tournaments/:tournament_id/stages/:stage_id/matches",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tournaments",
+                                    ":tournament_id",
+                                    "stages",
+                                    ":stage_id",
+                                    "matches"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tournament_id"
+                                    },
+                                    {
+                                      "key": "stage_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:46.000Z",
+                              "updatedAt": "2026-10-21T19:51:46.000Z",
+                              "uid": "35240-17bd4412-5d81-45fc-aaaf-ffdb2ab48fbf"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:51:46.000Z",
+                          "updatedAt": "2026-10-21T19:51:46.000Z",
+                          "uid": "35240-10ec38f3-86d0-479e-be01-9ec80a99e45c"
+                        }
+                      ],
+                      "id": "22793e39-14a1-4805-bad6-6575537cbce5",
+                      "createdAt": "2026-10-21T19:51:46.000Z",
+                      "updatedAt": "2026-10-21T19:51:46.000Z",
+                      "uid": "35240-22793e39-14a1-4805-bad6-6575537cbce5"
+                    }
+                  ],
+                  "id": "d2d85bfe-40d4-46cd-ad5e-027ebd4f2070",
+                  "createdAt": "2026-10-21T19:51:46.000Z",
+                  "updatedAt": "2026-10-21T19:51:46.000Z",
+                  "uid": "35240-d2d85bfe-40d4-46cd-ad5e-027ebd4f2070"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"stage_id\": \"string\",\n    \"round_id\": \"string\",\n    \"group_id\": \"string\",\n    \"number\": 3772,\n    \"status\": \"pending\",\n    \"scheduled_datetime\": \"1990-07-09T15:14:51.412Z\",\n    \"played_at\": \"1988-04-20T20:14:28.756Z\",\n    \"opponents\": [\n      {\n        \"number\": 3079,\n        \"participant\": {\n          \"id\": \"string\",\n          \"tournament_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"player\",\n          \"email\": \"4jJNZFehPphAjpe@hOWP.zol\",\n          \"checked_in\": false,\n          \"lineup\": [\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            },\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"1971-06-24T23:15:02.247Z\"\n        },\n        \"result\": \"lose\",\n        \"score\": 4906,\n        \"forfeit\": false\n      },\n      {\n        \"number\": 2499,\n        \"participant\": {\n          \"id\": \"string\",\n          \"tournament_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"player\",\n          \"email\": \"9fPXSPIVtg@pqNMGPIKWLyqy.hceg\",\n          \"checked_in\": true,\n          \"lineup\": [\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            },\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"1959-11-11T09:51:55.734Z\"\n        },\n        \"result\": \"lose\",\n        \"score\": 5790,\n        \"forfeit\": false\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"tournament_id\": \"string\",\n    \"stage_id\": \"string\",\n    \"round_id\": \"string\",\n    \"group_id\": \"string\",\n    \"number\": 7158,\n    \"status\": \"completed\",\n    \"scheduled_datetime\": \"2015-07-30T09:24:17.983Z\",\n    \"played_at\": \"1982-04-21T16:31:04.378Z\",\n    \"opponents\": [\n      {\n        \"number\": 6626,\n        \"participant\": {\n          \"id\": \"string\",\n          \"tournament_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"team\",\n          \"email\": \"qNzDJUP2a34@caloXcXoFUXUYD.jpfk\",\n          \"checked_in\": true,\n          \"lineup\": [\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            },\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"2010-11-03T00:04:24.567Z\"\n        },\n        \"result\": \"draw\",\n        \"score\": 9889,\n        \"forfeit\": false\n      },\n      {\n        \"number\": 2099,\n        \"participant\": {\n          \"id\": \"string\",\n          \"tournament_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"player\",\n          \"email\": \"ZJoVXXDxzP@qa.njvk\",\n          \"checked_in\": true,\n          \"lineup\": [\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            },\n            {\n              \"username\": \"string\",\n              \"name\": \"string\"\n            }\n          ],\n          \"custom_fields\": {},\n          \"created_at\": \"2019-06-02T06:32:00.078Z\"\n        },\n        \"result\": \"lose\",\n        \"score\": 1239,\n        \"forfeit\": false\n      }\n    ]\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "1886a36b-c5e5-4397-8ba7-f1edde758ca0",
+              "createdAt": "2026-10-21T19:51:46.000Z",
+              "updatedAt": "2026-10-21T19:51:46.000Z",
+              "uid": "35240-1886a36b-c5e5-4397-8ba7-f1edde758ca0"
             },
             {
-              "id": "626eae0a-3e50-4c2b-8023-b91053c2373d",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "stages",
-                    ":stage_id",
-                    "matches"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stage_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "Range",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "matches",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{match_id}",
+                  "item": [
+                    {
+                      "name": "Report Match Result",
+                      "id": "b2c06b6d-7392-44a5-a28c-6a53d1c6846c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"completed\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"win\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"lose\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tournaments/:tournament_id/matches/:match_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tournaments",
+                            ":tournament_id",
+                            "matches",
+                            ":match_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fceec19e-4117-40e8-bc89-2ff329c1f0bd",
+                              "key": "tournament_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "ea88c98b-ffd7-47b1-85bc-3a2b383145f0",
+                              "key": "match_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Submit or update the result for a specific match. Requires organizer:admin scope."
+                      },
+                      "response": [
+                        {
+                          "id": "245a675e-0ea0-4694-aaf3-5abb97a21af2",
+                          "name": "Match result reported.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Api-Key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"completed\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"win\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"lose\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/matches/:match_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "matches",
+                                ":match_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tournament_id"
+                                },
+                                {
+                                  "key": "match_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"tournament_id\": \"<string>\",\n  \"stage_id\": \"<string>\",\n  \"round_id\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"number\": \"<integer>\",\n  \"status\": \"pending\",\n  \"scheduled_datetime\": \"<dateTime>\",\n  \"played_at\": \"<dateTime>\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"participant\": {\n        \"id\": \"<string>\",\n        \"tournament_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"team\",\n        \"email\": \"<email>\",\n        \"checked_in\": \"<boolean>\",\n        \"lineup\": [\n          {\n            \"username\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"username\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"custom_fields\": {},\n        \"created_at\": \"<dateTime>\"\n      },\n      \"result\": \"draw\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"participant\": {\n        \"id\": \"<string>\",\n        \"tournament_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"team\",\n        \"email\": \"<email>\",\n        \"checked_in\": \"<boolean>\",\n        \"lineup\": [\n          {\n            \"username\": \"<string>\",\n            \"name\": \"<string>\"\n          },\n          {\n            \"username\": \"<string>\",\n            \"name\": \"<string>\"\n          }\n        ],\n        \"custom_fields\": {},\n        \"created_at\": \"<dateTime>\"\n      },\n      \"result\": \"lose\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:51:46.000Z",
+                          "updatedAt": "2026-10-21T19:51:46.000Z",
+                          "uid": "35240-245a675e-0ea0-4694-aaf3-5abb97a21af2"
+                        },
+                        {
+                          "id": "67071056-fab6-4ee7-ad5a-1b2b3fc5cb8f",
+                          "name": "Authentication failed \u2014 missing or invalid API key/token.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Api-Key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"completed\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"win\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"lose\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/matches/:match_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "matches",
+                                ":match_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tournament_id"
+                                },
+                                {
+                                  "key": "match_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:46.000Z",
+                          "updatedAt": "2026-10-21T19:51:46.000Z",
+                          "uid": "35240-67071056-fab6-4ee7-ad5a-1b2b3fc5cb8f"
+                        },
+                        {
+                          "id": "2dc4c208-f88b-4286-a2f2-6f13fa4a66de",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Api-Key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"completed\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"win\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"lose\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tournaments/:tournament_id/matches/:match_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tournaments",
+                                ":tournament_id",
+                                "matches",
+                                ":match_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tournament_id"
+                                },
+                                {
+                                  "key": "match_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:46.000Z",
+                          "updatedAt": "2026-10-21T19:51:46.000Z",
+                          "uid": "35240-2dc4c208-f88b-4286-a2f2-6f13fa4a66de"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:51:46.000Z",
+                      "updatedAt": "2026-10-21T19:51:46.000Z",
+                      "uid": "35240-b2c06b6d-7392-44a5-a28c-6a53d1c6846c"
+                    }
+                  ],
+                  "id": "e1e70f90-e8ed-4c64-96a4-c77378e5f049",
+                  "createdAt": "2026-10-21T19:51:46.000Z",
+                  "updatedAt": "2026-10-21T19:51:46.000Z",
+                  "uid": "35240-e1e70f90-e8ed-4c64-96a4-c77378e5f049"
                 }
               ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "912eacac-1230-4040-8440-2e20403d9af7",
+              "createdAt": "2026-10-21T19:51:46.000Z",
+              "updatedAt": "2026-10-21T19:51:46.000Z",
+              "uid": "35240-912eacac-1230-4040-8440-2e20403d9af7"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2bb964f6-ac3b-4281-845c-d40c8ca666e4",
-          "name": "Report Match Result",
-          "request": {
-            "name": "Report Match Result",
-            "description": {
-              "content": "Submit or update the result for a specific match. Requires organizer:admin scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tournaments",
-                ":tournament_id",
-                "matches",
-                ":match_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tournament_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "match_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "X-Api-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"status\": \"<string>\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "8e329498-6a87-4a2f-ac3e-4ec2430c55eb",
-              "name": "Match result reported.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "matches",
-                    ":match_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "match_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"status\": \"<string>\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"tournament_id\": \"string\",\n  \"stage_id\": \"string\",\n  \"round_id\": \"string\",\n  \"group_id\": \"string\",\n  \"number\": 9964,\n  \"status\": \"pending\",\n  \"scheduled_datetime\": \"1992-02-05T02:48:47.884Z\",\n  \"played_at\": \"1967-12-08T11:16:40.390Z\",\n  \"opponents\": [\n    {\n      \"number\": 1297,\n      \"participant\": {\n        \"id\": \"string\",\n        \"tournament_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"team\",\n        \"email\": \"J0Rumrd7Pnnh8@YiaoxqplsNrYdzhl.jb\",\n        \"checked_in\": true,\n        \"lineup\": [\n          {\n            \"username\": \"string\",\n            \"name\": \"string\"\n          },\n          {\n            \"username\": \"string\",\n            \"name\": \"string\"\n          }\n        ],\n        \"custom_fields\": {},\n        \"created_at\": \"1976-07-08T15:36:37.244Z\"\n      },\n      \"result\": \"lose\",\n      \"score\": 1008,\n      \"forfeit\": false\n    },\n    {\n      \"number\": 4428,\n      \"participant\": {\n        \"id\": \"string\",\n        \"tournament_id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"team\",\n        \"email\": \"oihve9AnsTbR@GDdYSEqo.nvux\",\n        \"checked_in\": false,\n        \"lineup\": [\n          {\n            \"username\": \"string\",\n            \"name\": \"string\"\n          },\n          {\n            \"username\": \"string\",\n            \"name\": \"string\"\n          }\n        ],\n        \"custom_fields\": {},\n        \"created_at\": \"1993-03-12T16:55:49.864Z\"\n      },\n      \"result\": \"lose\",\n      \"score\": 66,\n      \"forfeit\": false\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c396d0e8-156a-40d9-84ac-2c62995f4c6d",
-              "name": "Authentication failed — missing or invalid API key/token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "matches",
-                    ":match_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "match_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"status\": \"<string>\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3d7a4be2-15e9-41dc-9c54-982b4a15ccfe",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tournaments",
-                    ":tournament_id",
-                    "matches",
-                    ":match_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tournament_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "match_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "X-Api-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "Authorization",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"status\": \"<string>\",\n  \"opponents\": [\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    },\n    {\n      \"number\": \"<integer>\",\n      \"result\": \"<string>\",\n      \"score\": \"<integer>\",\n      \"forfeit\": \"<boolean>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d70b291a-1afd-4752-abea-0931ff37c6c0",
+          "createdAt": "2026-10-21T19:51:46.000Z",
+          "updatedAt": "2026-10-21T19:51:46.000Z",
+          "uid": "35240-d70b291a-1afd-4752-abea-0931ff37c6c0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.toornament.com/organizer/v2",
-      "key": "baseUrl"
+      "id": "92f88f26-4158-4e17-9df1-d9a49d44dcbb",
+      "createdAt": "2026-10-21T19:51:46.000Z",
+      "updatedAt": "2026-10-21T19:51:46.000Z",
+      "uid": "35240-92f88f26-4158-4e17-9df1-d9a49d44dcbb"
     }
   ],
   "auth": {
@@ -566,25 +546,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Api-Key"
+        "value": "X-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d63037b8-c1a7-4c65-b499-f68bb406fb5f",
-    "name": "Toornament Disciplines Matches API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Toornament API v2 provides comprehensive esports tournament management capabilities. It includes the Organizer API for full tournament CRUD operations, the Viewer API for public read-only tournament data access, and the Participant API for registration and check-in management. Authentication uses API key plus OAuth2 access tokens with scoped permissions.\n\nContact Support:\n Name: Toornament Developer",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.toornament.com/organizer/v2"
     }
-  }
+  ]
 }
